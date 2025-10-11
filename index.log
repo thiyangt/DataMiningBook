@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.10.4)  11 OCT 2025 05:42
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.10.4)  11 OCT 2025 06:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1053,7 +1053,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.379 \end{CSLReferences}
+l.384 \end{CSLReferences}
                          
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1062,7 +1062,7 @@ If that doesn't work, type  X <return>  to quit.
 Here is how much of TeX's memory you used:
  24047 strings out of 470405
  467051 string characters out of 5484690
- 1173300 words of memory out of 5000000
+ 1173450 words of memory out of 5000000
  52167 multiletter control sequences out of 15000+600000
  631301 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191

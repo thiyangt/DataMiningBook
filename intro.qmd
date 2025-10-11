@@ -2,43 +2,40 @@
 
 ## What is Data Mining?
 
-• Process of discovering interesting patterns of
-knowledge from huge amounts of data.
-• KDD: Knowledge Discovery from Data/ Knowledge
-Discovery from Data Mining
-• Process: Automatic or Semi-automatic
-• Interesting patterns: Valid, Novel, Useful, Understandable
+• Process of discovering interesting patterns of knowledge from huge amounts of data.
+
+
 
 ## What do we mean by interesting patterns?
 
+
+• Interesting patterns: Valid, Novel, Useful, Understandable
+
 Example
 
-• Retailers collect data about customer purchases at the
-checkout counters
-• Customer purchasing patterns: Identify which items are
-frequently sold together?
+• Retailers collect data about customer purchases at the checkout counters 
+
+• Customer purchasing patterns: Identify which items are frequently sold together?
+
 • Products that are likely to be purchased together.
 
 Why it is useful?
 
-• Can make a purchase suggestion to their customers
-• Gives an idea that how we can arrange items in a store to
-as a strategy for boosting sales.
+• Can make a purchase suggestion to their customers 
 
-##  Characteristics of Big Data: 5 V’s of Big Data
+• Gives an idea that how we can arrange items in a store to as a strategy for boosting sales.
 
-1. Volume: size
+## Characteristics of Big Data: 5 V’s of Big Data
 
-2. Velocity: how quickly data is generated?
+1.  Volume: size
 
-3. Variety: diversity
+2.  Velocity: how quickly data is generated?
 
-4. Veracity: quality of data
+3.  Variety: diversity
 
-5. Value: how useful?
+4.  Veracity: quality of data
 
-
-
+5.  Value: how useful?
 
 ## What motivates the development of data mining field?
 
@@ -50,39 +47,36 @@ as a strategy for boosting sales.
 
 • Data ownership and distribution
 
-
 ## Data Mining Tasks
 
-1. Predictive tasks: Predict the value of a particular attribute based on the values of other attributes
+1.  Predictive tasks: Predict the value of a particular attribute based on the values of other attributes
 
-2. Descriptive tasks: Find human-interpretable patterns
-that describe data
-
+2.  Descriptive tasks: Find human-interpretable patterns that describe data
 
 ## Data Quality
 
-1. Range: How narrow or wide of the scope of these data?
+1.  Range: How narrow or wide of the scope of these data?
 
-2. Relevancy: Is the data relevant to the problem?
+2.  Relevancy: Is the data relevant to the problem?
 
-3. Recency: How recent the data is generated?
+3.  Recency: How recent the data is generated?
 
-4. Robustness: Signal to noise ratio
+4.  Robustness: Signal to noise ratio
 
-5. Reliability: How accurate?
+5.  Reliability: How accurate?
 
 ## Applications
 
-1. Web mining: recommendation systems
+1.  Web mining: recommendation systems
 
-2. Screening images: Early warning of ecological disasters
+2.  Screening images: Early warning of ecological disasters
 
-3. Marketing and sales
+3.  Marketing and sales
 
-4. Diagnosis
+4.  Diagnosis
 
-5. Load forecasting
+5.  Load forecasting
 
-6. Decision involving judgement
+6.  Decision involving judgement
 
 Many more…
