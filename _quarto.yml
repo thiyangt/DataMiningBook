@@ -3,8 +3,8 @@ project:
   output-dir: docs
 
 book:
-  title: "tt"
-  author: "Norah Jones"
+  title: "Data Mining"
+  author: "Thiyanga S. Talagala"
   date: "10/11/2025"
   chapters:
     - index.qmd
