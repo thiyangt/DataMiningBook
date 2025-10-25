@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>1&nbsp; Introduction to Data Mining – Data Mining</title>
+<title>4&nbsp; Random Forests – Data Mining</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./ch2.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./references.html" rel="next">
+<link href="./ch3.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -81,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./intro.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Data Mining</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./ch4.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Random Forests</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -114,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Data Mining</span></span></a>
   </div>
 </li>
@@ -132,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Random Forests</span></span></a>
   </div>
 </li>
@@ -152,13 +181,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#what-is-data-mining" id="toc-what-is-data-mining" class="nav-link active" data-scroll-target="#what-is-data-mining"><span class="header-section-number">1.1</span> What is Data Mining?</a></li>
-  <li><a href="#what-do-we-mean-by-interesting-patterns" id="toc-what-do-we-mean-by-interesting-patterns" class="nav-link" data-scroll-target="#what-do-we-mean-by-interesting-patterns"><span class="header-section-number">1.2</span> What do we mean by interesting patterns?</a></li>
-  <li><a href="#characteristics-of-big-data-5-vs-of-big-data" id="toc-characteristics-of-big-data-5-vs-of-big-data" class="nav-link" data-scroll-target="#characteristics-of-big-data-5-vs-of-big-data"><span class="header-section-number">1.3</span> Characteristics of Big Data: 5 V’s of Big Data</a></li>
-  <li><a href="#what-motivates-the-development-of-data-mining-field" id="toc-what-motivates-the-development-of-data-mining-field" class="nav-link" data-scroll-target="#what-motivates-the-development-of-data-mining-field"><span class="header-section-number">1.4</span> What motivates the development of data mining field?</a></li>
-  <li><a href="#data-mining-tasks" id="toc-data-mining-tasks" class="nav-link" data-scroll-target="#data-mining-tasks"><span class="header-section-number">1.5</span> Data Mining Tasks</a></li>
-  <li><a href="#data-quality" id="toc-data-quality" class="nav-link" data-scroll-target="#data-quality"><span class="header-section-number">1.6</span> Data Quality</a></li>
-  <li><a href="#applications" id="toc-applications" class="nav-link" data-scroll-target="#applications"><span class="header-section-number">1.7</span> Applications</a></li>
+  <li><a href="#decision-trees---limitation" id="toc-decision-trees---limitation" class="nav-link active" data-scroll-target="#decision-trees---limitation"><span class="header-section-number">4.1</span> Decision trees - Limitation</a></li>
+  <li><a href="#bias-variance-trade-off" id="toc-bias-variance-trade-off" class="nav-link" data-scroll-target="#bias-variance-trade-off"><span class="header-section-number">4.2</span> Bias-Variance Trade off</a></li>
+  <li><a href="#bagging-bootstrap-aggregation" id="toc-bagging-bootstrap-aggregation" class="nav-link" data-scroll-target="#bagging-bootstrap-aggregation"><span class="header-section-number">4.3</span> Bagging (Bootstrap Aggregation)</a></li>
+  <li><a href="#ensemble-methods" id="toc-ensemble-methods" class="nav-link" data-scroll-target="#ensemble-methods"><span class="header-section-number">4.4</span> Ensemble Methods</a></li>
+  <li><a href="#ensemble-methods-1" id="toc-ensemble-methods-1" class="nav-link" data-scroll-target="#ensemble-methods-1"><span class="header-section-number">4.5</span> Ensemble Methods</a></li>
+  <li><a href="#bootstrap" id="toc-bootstrap" class="nav-link" data-scroll-target="#bootstrap"><span class="header-section-number">4.6</span> Bootstrap</a></li>
+  <li><a href="#aggregation" id="toc-aggregation" class="nav-link" data-scroll-target="#aggregation"><span class="header-section-number">4.7</span> Aggregation</a></li>
+  <li><a href="#bagging---in-class-diagram" id="toc-bagging---in-class-diagram" class="nav-link" data-scroll-target="#bagging---in-class-diagram"><span class="header-section-number">4.8</span> Bagging - in class diagram</a></li>
+  <li><a href="#bagging" id="toc-bagging" class="nav-link" data-scroll-target="#bagging"><span class="header-section-number">4.9</span> Bagging</a></li>
+  <li><a href="#bagging-1" id="toc-bagging-1" class="nav-link" data-scroll-target="#bagging-1"><span class="header-section-number">4.10</span> Bagging</a></li>
+  <li><a href="#random-forests-improving-on-bagging" id="toc-random-forests-improving-on-bagging" class="nav-link" data-scroll-target="#random-forests-improving-on-bagging"><span class="header-section-number">4.11</span> Random Forests: Improving on Bagging</a></li>
+  <li><a href="#random-forests" id="toc-random-forests" class="nav-link" data-scroll-target="#random-forests"><span class="header-section-number">4.12</span> Random Forests</a></li>
+  <li><a href="#random-forests---hyper-parameters" id="toc-random-forests---hyper-parameters" class="nav-link" data-scroll-target="#random-forests---hyper-parameters"><span class="header-section-number">4.13</span> Random Forests - Hyper parameters</a></li>
+  <li><a href="#random-forests-1" id="toc-random-forests-1" class="nav-link" data-scroll-target="#random-forests-1"><span class="header-section-number">4.14</span> Random Forests</a></li>
+  <li><a href="#random-forests-2" id="toc-random-forests-2" class="nav-link" data-scroll-target="#random-forests-2"><span class="header-section-number">4.15</span> Random Forests</a></li>
+  <li><a href="#out-of-bag-error" id="toc-out-of-bag-error" class="nav-link" data-scroll-target="#out-of-bag-error"><span class="header-section-number">4.16</span> Out-of-bag error</a></li>
+  <li><a href="#random-forests-3" id="toc-random-forests-3" class="nav-link" data-scroll-target="#random-forests-3"><span class="header-section-number">4.17</span> Random Forests</a></li>
+  <li><a href="#random-forests-4" id="toc-random-forests-4" class="nav-link" data-scroll-target="#random-forests-4"><span class="header-section-number">4.18</span> Random Forests</a></li>
+  <li><a href="#out-of-bag-oob-samples" id="toc-out-of-bag-oob-samples" class="nav-link" data-scroll-target="#out-of-bag-oob-samples"><span class="header-section-number">4.19</span> Out-of-Bag (OOB) Samples</a></li>
+  <li><a href="#out-of-bag-oob-samples-1" id="toc-out-of-bag-oob-samples-1" class="nav-link" data-scroll-target="#out-of-bag-oob-samples-1"><span class="header-section-number">4.20</span> Out-of-Bag (OOB) Samples</a></li>
+  <li><a href="#predictions-based-on-oob-observations" id="toc-predictions-based-on-oob-observations" class="nav-link" data-scroll-target="#predictions-based-on-oob-observations"><span class="header-section-number">4.21</span> Predictions based on OOB observations</a></li>
+  <li><a href="#predictions-based-on-oob-observations-1" id="toc-predictions-based-on-oob-observations-1" class="nav-link" data-scroll-target="#predictions-based-on-oob-observations-1"><span class="header-section-number">4.22</span> Predictions based on OOB observations</a></li>
+  <li><a href="#variable-importance-in-random-forest" id="toc-variable-importance-in-random-forest" class="nav-link" data-scroll-target="#variable-importance-in-random-forest"><span class="header-section-number">4.23</span> Variable Importance in Random Forest</a></li>
+  <li><a href="#permutation-based-variable-importance" id="toc-permutation-based-variable-importance" class="nav-link" data-scroll-target="#permutation-based-variable-importance"><span class="header-section-number">4.24</span> Permutation-based variable importance</a></li>
+  <li><a href="#mean-decrease-in-gini-coefficient" id="toc-mean-decrease-in-gini-coefficient" class="nav-link" data-scroll-target="#mean-decrease-in-gini-coefficient"><span class="header-section-number">4.25</span> Mean decrease in Gini coefficient</a></li>
+  <li><a href="#boosting" id="toc-boosting" class="nav-link" data-scroll-target="#boosting"><span class="header-section-number">4.26</span> Boosting</a></li>
+  <li><a href="#boosting-1" id="toc-boosting-1" class="nav-link" data-scroll-target="#boosting-1"><span class="header-section-number">4.27</span> Boosting</a></li>
+  <li><a href="#boosting-2" id="toc-boosting-2" class="nav-link" data-scroll-target="#boosting-2"><span class="header-section-number">4.28</span> Boosting</a></li>
+  <li><a href="#boosting-algorithms" id="toc-boosting-algorithms" class="nav-link" data-scroll-target="#boosting-algorithms"><span class="header-section-number">4.29</span> Boosting Algorithms</a></li>
   </ul>
 </nav>
     </div>
@@ -167,7 +218,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to Data Mining</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Random Forests</span></h1>
 </div>
 
 
@@ -184,66 +235,226 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="what-is-data-mining" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="what-is-data-mining"><span class="header-section-number">1.1</span> What is Data Mining?</h2>
-<p>• Process of discovering interesting patterns of knowledge from huge amounts of data.</p>
+<section id="decision-trees---limitation" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="decision-trees---limitation"><span class="header-section-number">4.1</span> Decision trees - Limitation</h2>
+<p>To capture a complex decision boundary we need to use a deep tree</p>
+<p>In-class explanation</p>
 </section>
-<section id="what-do-we-mean-by-interesting-patterns" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="what-do-we-mean-by-interesting-patterns"><span class="header-section-number">1.2</span> What do we mean by interesting patterns?</h2>
-<p>• Interesting patterns: Valid, Novel, Useful, Understandable</p>
+<section id="bias-variance-trade-off" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="bias-variance-trade-off"><span class="header-section-number">4.2</span> Bias-Variance Trade off</h2>
+<ul>
+<li>A deep decision tree has low bias and high variance.</li>
+</ul>
+<p><img src="bv.jpeg" class="img-fluid"></p>
+</section>
+<section id="bagging-bootstrap-aggregation" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="bagging-bootstrap-aggregation"><span class="header-section-number">4.3</span> Bagging (Bootstrap Aggregation)</h2>
+<ul>
+<li><p>Technique for reducing the variance of an estimated predicted function</p></li>
+<li><p>Works well for high-variance, low-bias procedures, such as trees</p></li>
+</ul>
+</section>
+<section id="ensemble-methods" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="ensemble-methods"><span class="header-section-number">4.4</span> Ensemble Methods</h2>
+<ul>
+<li><p>Combines several base models</p></li>
+<li><p><strong>Bagg</strong>ing (<strong>B</strong>ootstrap <strong>Agg</strong>regation) is an ensemble method</p></li>
+</ul>
+<!--The main idea is that each individual learner is weak and therefore less likely to pick up on every single pattern so the more learners you have the better.-->
+</section>
+<section id="ensemble-methods-1" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="ensemble-methods-1"><span class="header-section-number">4.5</span> Ensemble Methods</h2>
+<p>“Ensemble learning gives credence to the idea of the “wisdom of crowds,” which suggests that the decision-making of a larger group of people is typically better than that of an individual expert.”</p>
+<p>Source: <a href="https://www.ibm.com/cloud/learn/boosting" class="uri">https://www.ibm.com/cloud/learn/boosting</a></p>
+</section>
+<section id="bootstrap" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="bootstrap"><span class="header-section-number">4.6</span> Bootstrap</h2>
+<ul>
+<li>Generate multiple samples of training data, via bootstrapping</li>
+</ul>
 <p>Example</p>
-<p>• Retailers collect data about customer purchases at the checkout counters</p>
-<p>• Customer purchasing patterns: Identify which items are frequently sold together?</p>
-<p>• Products that are likely to be purchased together.</p>
-<p>Why it is useful?</p>
-<p>• Can make a purchase suggestion to their customers</p>
-<p>• Gives an idea that how we can arrange items in a store to as a strategy for boosting sales.</p>
+<p>Training data: <span class="math inline">\(\{(y_1, x_1), (y_2, x_2), (y_3, x_3), (y_4, x_4)\}\)</span></p>
+<p>Three samples generated from bootstrapping</p>
+<p>Sample 1 = <span class="math inline">\(\{(y_1, x_1), (y_2, x_2), (y_3, x_3), (y_4, x_4)\}\)</span></p>
+<p>Sample 2 = <span class="math inline">\(\{(y_1, x_1), (y_1, x_1), (y_1, x_1), (y_4, x_4)\}\)</span></p>
+<p>Sample 3 = <span class="math inline">\(\{(y_1, x_1), (y_2, x_2), (y_1, x_1), (y_4, x_4)\}\)</span></p>
 </section>
-<section id="characteristics-of-big-data-5-vs-of-big-data" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="characteristics-of-big-data-5-vs-of-big-data"><span class="header-section-number">1.3</span> Characteristics of Big Data: 5 V’s of Big Data</h2>
+<section id="aggregation" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="aggregation"><span class="header-section-number">4.7</span> Aggregation</h2>
+<ul>
+<li><p>Train a decision tree on each bootstrap sample of data without pruning.</p></li>
+<li><p>Aggregate prediction using either voting or averaging</p></li>
+</ul>
+</section>
+<section id="bagging---in-class-diagram" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="bagging---in-class-diagram"><span class="header-section-number">4.8</span> Bagging - in class diagram</h2>
+</section>
+<section id="bagging" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="bagging"><span class="header-section-number">4.9</span> Bagging</h2>
+<p><strong>Pros</strong></p>
+<ul>
+<li><p>Ease of implementation</p></li>
+<li><p>Reduction of variance</p></li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li><p>Loss of interpretability</p></li>
+<li><p>Computationally expensive</p></li>
+</ul>
+</section>
+<section id="bagging-1" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="bagging-1"><span class="header-section-number">4.10</span> Bagging</h2>
+<ul>
+<li><p>Bootstrapped subsamples are created</p></li>
+<li><p>A Decision Tree is formed on each bootstrapped sample.</p></li>
+<li><p>The results of each tree are aggregated</p></li>
+</ul>
+</section>
+<section id="random-forests-improving-on-bagging" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="random-forests-improving-on-bagging"><span class="header-section-number">4.11</span> Random Forests: Improving on Bagging</h2>
+<ul>
+<li><p>The ensembles of trees in Bagging tend to be highly correlated.</p></li>
+<li><p>All of the bagged trees will look quite similar to each other. Hence, the predictions from the bagged trees will be highly correlated.</p></li>
+</ul>
+</section>
+<section id="random-forests" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="random-forests"><span class="header-section-number">4.12</span> Random Forests</h2>
 <ol type="1">
-<li><p>Volume: size</p></li>
-<li><p>Velocity: how quickly data is generated?</p></li>
-<li><p>Variety: diversity</p></li>
-<li><p>Veracity: quality of data</p></li>
-<li><p>Value: how useful?</p></li>
+<li><p>Bootstrap samples</p></li>
+<li><p>At each split, randomly select a set of predictors from the full set of predictors</p></li>
+<li><p>From the selected predictors we select the optimal predictor and the optimal corresponding threshold for the split.</p></li>
+<li><p>Grow multiple trees and aggregate</p></li>
 </ol>
 </section>
-<section id="what-motivates-the-development-of-data-mining-field" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="what-motivates-the-development-of-data-mining-field"><span class="header-section-number">1.4</span> What motivates the development of data mining field?</h2>
-<p>• Scalability</p>
-<p>• High dimensionality</p>
-<p>• Heterogeneous and complex data</p>
-<p>• Data ownership and distribution</p>
-</section>
-<section id="data-mining-tasks" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="data-mining-tasks"><span class="header-section-number">1.5</span> Data Mining Tasks</h2>
+<section id="random-forests---hyper-parameters" class="level2" data-number="4.13">
+<h2 data-number="4.13" class="anchored" data-anchor-id="random-forests---hyper-parameters"><span class="header-section-number">4.13</span> Random Forests - Hyper parameters</h2>
 <ol type="1">
-<li><p>Predictive tasks: Predict the value of a particular attribute based on the values of other attributes</p></li>
-<li><p>Descriptive tasks: Find human-interpretable patterns that describe data</p></li>
+<li><p>Number of variables randomly sampled as candidates at each split</p></li>
+<li><p>Number of trees to grow</p></li>
+<li><p>Minimum size of terminal nodes. Setting this number larger causes smaller trees to be grown (and thus take less time).</p></li>
+</ol>
+<p>Note: In theory, each tree in the random forest is full (not pruned), but in practice this can be computationally expensive,thus, imposing a minimum node size is not unusual.</p>
+</section>
+<section id="random-forests-1" class="level2" data-number="4.14">
+<h2 data-number="4.14" class="anchored" data-anchor-id="random-forests-1"><span class="header-section-number">4.14</span> Random Forests</h2>
+<ul>
+<li><p>Bagging ensemble method</p></li>
+<li><p>Gives final prediction by aggregating the predictions of bootstrapped decision tree samples.</p></li>
+<li><p>Trees in a random forest are independent of each other.</p></li>
+</ul>
+</section>
+<section id="random-forests-2" class="level2" data-number="4.15">
+<h2 data-number="4.15" class="anchored" data-anchor-id="random-forests-2"><span class="header-section-number">4.15</span> Random Forests</h2>
+<p><strong>Pros</strong></p>
+<ul>
+<li>Accuracy</li>
+</ul>
+<p><strong>Cons</strong></p>
+<ul>
+<li><p>Speed</p></li>
+<li><p>Interpretability</p></li>
+<li><p>Overfitting</p></li>
+</ul>
+</section>
+<section id="out-of-bag-error" class="level2" data-number="4.16">
+<h2 data-number="4.16" class="anchored" data-anchor-id="out-of-bag-error"><span class="header-section-number">4.16</span> Out-of-bag error</h2>
+<p>With ensemble methods, we get a new metric for assessing the predictive performance of the model, the out-of-bag error</p>
+</section>
+<section id="random-forests-3" class="level2" data-number="4.17">
+<h2 data-number="4.17" class="anchored" data-anchor-id="random-forests-3"><span class="header-section-number">4.17</span> Random Forests</h2>
+<p><img src="rf1.png" class="img-fluid"></p>
+</section>
+<section id="random-forests-4" class="level2" data-number="4.18">
+<h2 data-number="4.18" class="anchored" data-anchor-id="random-forests-4"><span class="header-section-number">4.18</span> Random Forests</h2>
+<p><img src="rf2.png" class="img-fluid"></p>
+</section>
+<section id="out-of-bag-oob-samples" class="level2" data-number="4.19">
+<h2 data-number="4.19" class="anchored" data-anchor-id="out-of-bag-oob-samples"><span class="header-section-number">4.19</span> Out-of-Bag (OOB) Samples</h2>
+<p><img src="rf3.png" class="img-fluid"></p>
+</section>
+<section id="out-of-bag-oob-samples-1" class="level2" data-number="4.20">
+<h2 data-number="4.20" class="anchored" data-anchor-id="out-of-bag-oob-samples-1"><span class="header-section-number">4.20</span> Out-of-Bag (OOB) Samples</h2>
+<p><img src="rf4.png" class="img-fluid"></p>
+</section>
+<section id="predictions-based-on-oob-observations" class="level2" data-number="4.21">
+<h2 data-number="4.21" class="anchored" data-anchor-id="predictions-based-on-oob-observations"><span class="header-section-number">4.21</span> Predictions based on OOB observations</h2>
+<p><img src="rf5.png" class="img-fluid"></p>
+</section>
+<section id="predictions-based-on-oob-observations-1" class="level2" data-number="4.22">
+<h2 data-number="4.22" class="anchored" data-anchor-id="predictions-based-on-oob-observations-1"><span class="header-section-number">4.22</span> Predictions based on OOB observations</h2>
+<p>Figure 1</p>
+<p><img src="rf6.png" class="img-fluid"></p>
+<p>Figure 2</p>
+<p><img src="rf7.png" class="img-fluid"></p>
+<p>Figure 3</p>
+<p><img src="rf8.png" class="img-fluid"></p>
+<p>Figure 4</p>
+<p><img src="rf9.png" class="img-fluid"></p>
+<p>Figure 5</p>
+<p><img src="rf10.png" class="img-fluid"></p>
+<p>Figure 6</p>
+<p><img src="rf11.png" class="img-fluid"></p>
+<p>Figure 7</p>
+<p><img src="rf12.png" class="img-fluid"></p>
+<p>Figure 8</p>
+<p><img src="rf13.png" class="img-fluid"></p>
+</section>
+<section id="variable-importance-in-random-forest" class="level2" data-number="4.23">
+<h2 data-number="4.23" class="anchored" data-anchor-id="variable-importance-in-random-forest"><span class="header-section-number">4.23</span> Variable Importance in Random Forest</h2>
+<p><strong>contribution to predictive accuracy</strong></p>
+<ul>
+<li><p>Permutation-based variable importance</p></li>
+<li><p>Mean decrease in Gini coefficient</p></li>
+</ul>
+</section>
+<section id="permutation-based-variable-importance" class="level2" data-number="4.24">
+<h2 data-number="4.24" class="anchored" data-anchor-id="permutation-based-variable-importance"><span class="header-section-number">4.24</span> Permutation-based variable importance</h2>
+<ul>
+<li><p>the OOB samples are passed down the tree, and the prediction accuracy is recorded</p></li>
+<li><p>the values for the <span class="math inline">\(j^{th}\)</span> variable are randomly permuted in the OOB samples, and the accuracy is again computed.</p></li>
+<li><p>the decrease in accuracy as a result of this permuting is averaged over all trees, and is used as a measure of the importance of variable <span class="math inline">\(j\)</span> in the random forests</p></li>
+</ul>
+</section>
+<section id="mean-decrease-in-gini-coefficient" class="level2" data-number="4.25">
+<h2 data-number="4.25" class="anchored" data-anchor-id="mean-decrease-in-gini-coefficient"><span class="header-section-number">4.25</span> Mean decrease in Gini coefficient</h2>
+<ul>
+<li><p>Measure of how each variable contributes to the homogeneity of the nodes and leaves in the resulting random forest</p></li>
+<li><p>The higher the value of mean decrease accuracy or mean decrease Gini score, the higher the importance of the variable in the model</p></li>
+</ul>
+</section>
+<section id="boosting" class="level2" data-number="4.26">
+<h2 data-number="4.26" class="anchored" data-anchor-id="boosting"><span class="header-section-number">4.26</span> Boosting</h2>
+<ul>
+<li><p>Bagging and boosting are two main types of ensemble learning methods.</p></li>
+<li><p>The main difference between bagging and boosting is the way in which they are trained.</p></li>
+<li><p>In bagging, weak learners (decision trees) are trained in parallel, but in boosting, they learn sequentially.</p></li>
+</ul>
+</section>
+<section id="boosting-1" class="level2" data-number="4.27">
+<h2 data-number="4.27" class="anchored" data-anchor-id="boosting-1"><span class="header-section-number">4.27</span> Boosting</h2>
+<ol type="1">
+<li><p>Fit a single tree</p></li>
+<li><p>Draw a sample that gives higher selection probabilities to misclassified records</p></li>
+<li><p>Fit a tree to the new sample</p></li>
+<li><p>Repeat Steps 2 and 3 multiple times</p></li>
+<li><p>Use weighted voting to classify records, with heavier weights for later trees</p></li>
 </ol>
 </section>
-<section id="data-quality" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="data-quality"><span class="header-section-number">1.6</span> Data Quality</h2>
-<ol type="1">
-<li><p>Range: How narrow or wide of the scope of these data?</p></li>
-<li><p>Relevancy: Is the data relevant to the problem?</p></li>
-<li><p>Recency: How recent the data is generated?</p></li>
-<li><p>Robustness: Signal to noise ratio</p></li>
-<li><p>Reliability: How accurate?</p></li>
-</ol>
+<section id="boosting-2" class="level2" data-number="4.28">
+<h2 data-number="4.28" class="anchored" data-anchor-id="boosting-2"><span class="header-section-number">4.28</span> Boosting</h2>
+<ul>
+<li><p>Iterative process.</p></li>
+<li><p>Each tree is dependent on the previous one. Hence, it is hard to parallelize the training process of boosting algorithms.</p></li>
+<li><p>The training time will be higher. This is the main drawback of boosting algorithms.</p></li>
+</ul>
 </section>
-<section id="applications" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="applications"><span class="header-section-number">1.7</span> Applications</h2>
-<ol type="1">
-<li><p>Web mining: recommendation systems</p></li>
-<li><p>Screening images: Early warning of ecological disasters</p></li>
-<li><p>Marketing and sales</p></li>
-<li><p>Diagnosis</p></li>
-<li><p>Load forecasting</p></li>
-<li><p>Decision involving judgement</p></li>
-</ol>
-<p>Many more…</p>
+<section id="boosting-algorithms" class="level2" data-number="4.29">
+<h2 data-number="4.29" class="anchored" data-anchor-id="boosting-algorithms"><span class="header-section-number">4.29</span> Boosting Algorithms</h2>
+<ul>
+<li><p>Adaptive boosting or AdaBoost</p></li>
+<li><p>Gradient boosting</p></li>
+<li><p>Extreme gradient boosting or XGBoost</p></li>
+</ul>
 
 
 </section>
@@ -668,13 +879,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link" aria-label="Preface">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./ch3.html" class="pagination-link" aria-label="Decision Trees">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Decision Trees</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./ch2.html" class="pagination-link" aria-label="What is Statistical Learing?">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">What is Statistical Learing?</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./ch4.html" rel="next">
 <link href="./ch2.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -191,6 +191,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./ch3.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Decision Trees</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Random Forests</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -448,8 +454,8 @@ If the predictor <code>Species</code> = {A, B, C}, possible splits are:</p>
 <h3 data-number="3.6.5" class="anchored" data-anchor-id="summary"><span class="header-section-number">3.6.5</span> Summary</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 41%">
-<col style="width: 58%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -567,8 +573,8 @@ C(T) = \text{Error}(T) + \lambda L(T)
 <h3 data-number="3.8.4" class="anchored" data-anchor-id="interpretation-of-parameters"><span class="header-section-number">3.8.4</span> Interpretation of Parameters</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 54%">
-<col style="width: 45%">
+<col style="width: 50%">
+<col style="width: 50%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -671,12 +677,12 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
     cp = 0.02, maxdepth = 3))
   n= 32 
 
-          CP nsplit rel error    xerror       xstd
-1 0.65266121      0 1.0000000 1.0863063 0.26519210
-2 0.19470235      1 0.3473388 0.6852332 0.16791734
-3 0.03618342      2 0.1526364 0.3430358 0.10012133
-4 0.02324972      3 0.1164530 0.2957831 0.07419667
-5 0.02000000      4 0.0932033 0.2887422 0.07322052
+          CP nsplit rel error    xerror      xstd
+1 0.65266121      0 1.0000000 1.0394094 0.2471302
+2 0.19470235      1 0.3473388 0.7835183 0.1672961
+3 0.03618342      2 0.1526364 0.4803112 0.1251639
+4 0.02324972      3 0.1164530 0.4742270 0.1301623
+5 0.02000000      4 0.0932033 0.4534145 0.1292722
 
 Variable importance
   wt disp   hp drat  cyl qsec   vs 
@@ -781,9 +787,9 @@ Root node error: 1126/32 = 35.189
 n= 32 
 
         CP nsplit rel error  xerror    xstd
-1 0.643125      0   1.00000 1.02606 0.24552
-2 0.097484      1   0.35687 0.64743 0.16940
-3 0.000100      2   0.25939 0.53811 0.12137</code></pre>
+1 0.643125      0   1.00000 1.04204 0.24703
+2 0.097484      1   0.35687 0.60348 0.16402
+3 0.000100      2   0.25939 0.47353 0.10614</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Plot cross-validation results</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotcp</span>(full_tree, <span class="at">main =</span> <span class="st">"Cost-Complexity Pruning Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -817,9 +823,9 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror      xstd
-1 0.64312523      0 1.0000000 1.0260596 0.2455202
-2 0.09748407      1 0.3568748 0.6474280 0.1694045
-3 0.00010000      2 0.2593907 0.5381142 0.1213682
+1 0.64312523      0 1.0000000 1.0420380 0.2470261
+2 0.09748407      1 0.3568748 0.6034829 0.1640170
+3 0.00010000      2 0.2593907 0.4735272 0.1061364
 
 Variable importance
  cyl disp   hp   wt qsec   vs carb 
@@ -987,9 +993,9 @@ I_{\text{split}} = \frac{n_L}{n} I_L + \frac{n_R}{n} I_R
 <h3 data-number="3.10.6" class="anchored" data-anchor-id="comparing-entropy-and-gini"><span class="header-section-number">3.10.6</span> Comparing Entropy and Gini</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 40%">
-<col style="width: 37%">
-<col style="width: 22%">
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1457,8 +1463,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./ch4.html" class="pagination-link" aria-label="Random Forests">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Random Forests</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

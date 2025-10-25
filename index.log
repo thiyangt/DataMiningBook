@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.10.4)  18 OCT 2025 00:41
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.10.25)  25 OCT 2025 05:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **index.tex
 (./index.tex
 LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-09-02>
+L3 programming layer <2025-10-09>
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrreprt.cls
 Document Class: scrreprt 2025/09/09 v3.48 KOMA-Script document class (report)
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -196,9 +196,9 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2025-09-02 L3 programming layer (loader) 
+Package: expl3 2025-10-09 L3 programming layer (loader) 
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
-File: l3backend-xetex.def 2025-06-09 L3 backend support: XeTeX
+File: l3backend-xetex.def 2025-10-09 L3 backend support: XeTeX
 \g__graphics_track_int=\count293
 \g__pdfannot_backend_int=\count294
 \g__pdfannot_backend_link_int=\count295
@@ -207,9 +207,9 @@ Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
 Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2024-08-16 L3 Experimental document command parser
+Package: xparse 2025-10-09 L3 Experimental document command parser
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
-Package: l3keys2e 2024-08-16 LaTeX2e option processing using LaTeX3 keys
+Package: l3keys2e 2025-10-09 LaTeX2e option processing using LaTeX3 keys
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
 Package: fontspec 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTeX
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
@@ -1205,6 +1205,150 @@ Package longtable Warning: Column widths have changed
 [27]
 
 [28]
+chapter 4.
+File: bv.jpeg Graphic file (type bmp)
+<bv.jpeg>
+
+Overfull \hbox (10.9664pt too wide) in paragraph at lines 1227--1228
+[][] 
+ []
+
+
+
+[29
+
+]
+
+[30]
+
+[31]
+
+[32]
+File: rf1.png Graphic file (type bmp)
+<rf1.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1405--1406
+[] 
+ []
+
+
+
+[33]
+File: rf2.png Graphic file (type bmp)
+<rf2.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1409--1410
+[] 
+ []
+
+
+
+[34]
+File: rf3.png Graphic file (type bmp)
+<rf3.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1413--1414
+[] 
+ []
+
+
+
+[35]
+File: rf4.png Graphic file (type bmp)
+<rf4.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1417--1418
+[] 
+ []
+
+
+
+[36]
+File: rf5.png Graphic file (type bmp)
+<rf5.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1422--1423
+[] 
+ []
+
+
+
+[37]
+File: rf6.png Graphic file (type bmp)
+<rf6.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1429--1430
+[][] 
+ []
+
+
+
+[38]
+File: rf7.png Graphic file (type bmp)
+<rf7.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1433--1434
+[][] 
+ []
+
+File: rf8.png Graphic file (type bmp)
+<rf8.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1437--1438
+[][] 
+ []
+
+
+
+[39]
+File: rf9.png Graphic file (type bmp)
+<rf9.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1441--1442
+[][] 
+ []
+
+File: rf10.png Graphic file (type bmp)
+<rf10.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1445--1446
+[][] 
+ []
+
+
+
+[40]
+File: rf11.png Graphic file (type bmp)
+<rf11.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1449--1450
+[][] 
+ []
+
+File: rf12.png Graphic file (type bmp)
+<rf12.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1453--1454
+[][] 
+ []
+
+
+
+[41]
+File: rf13.png Graphic file (type bmp)
+<rf13.png>
+
+Overfull \hbox (10.93944pt too wide) in paragraph at lines 1457--1458
+[][] 
+ []
+
+
+
+[42]
+
+[43]
+
+[44]
 
 ! LaTeX Error: Something's wrong--perhaps a missing \item.
 
@@ -1212,18 +1356,18 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1218 \end{CSLReferences}
+l.1563 \end{CSLReferences}
                           
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
  
 Here is how much of TeX's memory you used:
- 24283 strings out of 470405
- 475144 string characters out of 5484690
- 1182450 words of memory out of 5000000
- 52368 multiletter control sequences out of 15000+600000
+ 24443 strings out of 470404
+ 476960 string characters out of 5484672
+ 1182592 words of memory out of 5000000
+ 52513 multiletter control sequences out of 15000+600000
  634168 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  108i,8n,114p,11208b,575s stack positions out of 10000i,1000n,20000p,200000b,200000s
-Output written on index.pdf (28 pages).
+Output written on index.pdf (44 pages).

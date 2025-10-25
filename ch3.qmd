@@ -50,14 +50,13 @@ $R1 = \{X|Sepal.Width >=3, Sepal.Length <5.5
 
 ## Parts of a decision tree
 
-  - Root node
-  
-  - Decision node
+-   Root node
 
-  - Terminal node/ Leaf node (gives outputs/class
-assignments)
+-   Decision node
 
-  - Subtree
+-   Terminal node/ Leaf node (gives outputs/class assignments)
+
+-   Subtree
 
 ## Introduction
 
@@ -75,16 +74,11 @@ How to make predictions?
 
 -   We make the same prediction, for the training observations in the $j^{th}$ region $R_j$.
 
-
-
-
-
 ## Decision Trees: Regression - Finding the best split and best splitting variable
 
 The goal is to find $R_1, R_2, R_3...R_J$, $J$ distinct and non-overlapping regions that minimize the RSS given by
 
-$$\sum_{j=1}^{J}\sum_{i \in R_j}(y_i - \hat{y}_{R_j})^2.$$
-$\hat{y}_{R_j}$ - mean response for the training observations within the $j^{th}$ region.
+$$\sum_{j=1}^{J}\sum_{i \in R_j}(y_i - \hat{y}_{R_j})^2.$$ $\hat{y}_{R_j}$ - mean response for the training observations within the $j^{th}$ region.
 
 In theory, to build the best possible decision tree, we could try every possible way of splitting the data at every step and choose the one that gives the best results. However, this is computationally infeasible, especially when the dataset is large or when there are many predictor variables — the number of possible splits grows exponentially.
 
@@ -100,73 +94,61 @@ Repeat the process (recursively) within each subgroup: again find the best split
 
 This recursive process allows the algorithm to build the tree step by step, finding locally optimal splits that approximate the best possible tree without having to evaluate every possible combination.
 
-
 ## Recursive Partitioning for Regression Trees
 
-A regression tree predicts a continuous outcome (for example, house price, temperature, or pH level).
-The goal is to split the data into smaller and smaller groups (nodes) that are as homogeneous as possible with respect to the response variable.
+A regression tree predicts a continuous outcome (for example, house price, temperature, or pH level). The goal is to split the data into smaller and smaller groups (nodes) that are as homogeneous as possible with respect to the response variable.
 
 In-class notation
 
 ## Recursive Partitioning for Regression Trees
 
-A **regression tree** is used when the response variable is *continuous* (e.g., house price, temperature, or pH level).  
+A **regression tree** is used when the response variable is *continuous* (e.g., house price, temperature, or pH level).
 
 The goal is to split the data into smaller and smaller groups (nodes) that are as **homogeneous as possible** with respect to the response.
-
-
 
 ### Step 1: Start with All Predictors
 
 At the beginning, the algorithm considers **all predictor variables**:
 
-
 $$X_1, X_2, X_3, \dots, X_p$$
 
-
 For each predictor, it looks for the **best split point** that divides the data into two groups such that the prediction error (usually the **sum of squared errors, SSE**) is minimized.
-
-
 
 ### Step 2: Consider All Possible Values
 
 #### Continuous predictors
-If a predictor $X_j$ is **continuous**,  
+
+If a predictor $X_j$ is **continuous**,\
 then "all possible values" refers to **all unique values** (or **midpoints between consecutive sorted values**) that can be used to split the data.
 
 Example:
 
 | Observation | $X_j$ |
-|--------------|-----------|
-| 1 | 2 |
-| 2 | 3 |
-| 3 | 5 |
-| 4 | 7 |
+|-------------|-------|
+| 1           | 2     |
+| 2           | 3     |
+| 3           | 5     |
+| 4           | 7     |
 
-Possible split points (midpoints):
-- $X_j < 2.5$
-- $X_j < 4$
-- $X_j < 6$
+Possible split points (midpoints): - $X_j < 2.5$ - $X_j < 4$ - $X_j < 6$
 
 Each of these potential splits is tested to see how well it reduces the SSE of the response variable.
 
 #### Categorical predictors
 
-If $X_j$ is **categorical**,  
+If $X_j$ is **categorical**,\
 "all possible values" means all possible **groupings (subsets)** of the categories.
 
-Example:  
+Example:\
 If the predictor `Species` = {A, B, C}, possible splits are:
 
-- {A} vs {B, C}
+-   {A} vs {B, C}
 
-- {B} vs {A, C}
+-   {B} vs {A, C}
 
-- {C} vs {A, B}
+-   {C} vs {A, B}
 
 Each grouping is evaluated based on how much it reduces the variability in the response.
-
-
 
 ### Step 3: Choose the Best Split
 
@@ -178,33 +160,26 @@ $$
 
 The **split that minimizes** this total SSE is chosen as the best split for that node.
 
-
-
 ### Step 4: Recursive Partitioning
 
 After splitting the data into two nodes, the same process is applied **recursively** within each node:
 
-1. Consider all predictors again.  
-2. For each predictor, test all possible values.  
-3. Find the best split within that node.  
-4. Continue until a stopping rule is met (e.g., minimum node size or no significant improvement).
-
-
+1.  Consider all predictors again.\
+2.  For each predictor, test all possible values.\
+3.  Find the best split within that node.\
+4.  Continue until a stopping rule is met (e.g., minimum node size or no significant improvement).
 
 ### Summary
 
 | Concept | Explanation |
-|----------|--------------|
+|----|----|
 | **All predictors** | Every variable $X_1, X_2, \dots, X_p$ is considered at each split. |
 | **All possible values** | Every unique value (or midpoint between values) is tested as a potential split. |
 | **Recursive partitioning** | The process of repeatedly splitting the data into smaller homogeneous groups until a stopping rule is met. |
 
-
-
-> **In summary:**  
-> Finding every possible combination of splits is computationally infeasible.  
+> **In summary:**\
+> Finding every possible combination of splits is computationally infeasible.\
 > Recursive partitioning provides a practical, step-by-step method that finds locally optimal splits efficiently.
-
 
 ## Depth of the decision tree
 
@@ -217,7 +192,6 @@ ggplot(data, aes(x=Sepal.Length, y=Sepal.Width)) +
   theme_minimal()
 ```
 
-
 ```{r, echo=FALSE}
 tree2 <- rpart(Petal.Length~Sepal.Length + Sepal.Width, data=data, maxdepth=5)
 rpart.plot(tree2, box.palette="RdBu", shadow.col="gray", nn=TRUE)
@@ -227,23 +201,18 @@ ggplot(data, aes(x=Sepal.Length, y=Sepal.Width)) +
   theme_minimal()
 ```
 
-
 ## Pruning Regression Trees
 
-Once a regression tree is grown, it often becomes **too complex** — it may fit the training data very well but perform poorly on new, unseen data.  
+Once a regression tree is grown, it often becomes **too complex** — it may fit the training data very well but perform poorly on new, unseen data.\
 This problem is known as **overfitting**.
 
 **Pruning** is the process of **reducing the size** of a fully grown tree to improve its ability to generalize.
 
-
-
 ### Why Prune?
 
-- A large tree captures **noise** as if it were structure.  
-- It has **low bias** but **high variance**.  
-- Pruning helps to find a **balance between model complexity and prediction accuracy**.
-
-
+-   A large tree captures **noise** as if it were structure.\
+-   It has **low bias** but **high variance**.\
+-   Pruning helps to find a **balance between model complexity and prediction accuracy**.
 
 ### Types of Pruning
 
@@ -255,23 +224,21 @@ Stop the tree growth **before** it becomes too large.
 
 Common stopping rules:
 
-- Minimum number of observations in a node 
+-   Minimum number of observations in a node
 
-- Maximum tree depth  
+-   Maximum tree depth
 
-- Minimum decrease in SSE required for a split
+-   Minimum decrease in SSE required for a split
 
 #### (b) Post-pruning (Cost Complexity Pruning)
 
 Grow a **large tree first**, then prune it **backward** by removing branches that contribute little to predictive accuracy.
 
-
-
 ### Cost Complexity Pruning (a.k.a. Weakest Link Pruning)
 
 The idea is to penalize tree size using a complexity parameter ($\lambda$).
 
-For any subtree \( T \):
+For any subtree ( T ):
 
 $$
 C(T) = \text{Error}(T) + \lambda L(T)
@@ -279,21 +246,17 @@ $$
 
 where:
 
-- \text{Error}(T): measure of fit (e.g., sum of squared errors)  
-- $L(T)$: number of leaf nodes in the tree (measure of complexity)  
-- $\lambda$: penalty factor controlling the trade-off between complexity and predictive power  
-
-
+-   \text{Error}(T): measure of fit (e.g., sum of squared errors)\
+-   $L(T)$: number of leaf nodes in the tree (measure of complexity)\
+-   $\lambda$: penalty factor controlling the trade-off between complexity and predictive power
 
 ### Interpretation of Parameters
 
 | Parameter | Meaning |
-|------------|----------|
+|----|----|
 | $\lambda = 0$ | Fully grown decision tree (no penalty for complexity). |
 | $\lambda = \infty$ | Root node only (maximum penalty, no splits). |
 | $0 < \lambda < \infty$ | Balances predictive power and complexity. |
-
-
 
 ### Total Cost Components
 
@@ -301,11 +264,10 @@ $$
 \text{Total Cost} = \text{Measure of Fit} + \text{Measure of Complexity}
 $$
 
-- **Measure of Fit:** Error (e.g., SSE)  
-- **Measure of Complexity:** Number of leaf nodes $L(T)$
+-   **Measure of Fit:** Error (e.g., SSE)\
+-   **Measure of Complexity:** Number of leaf nodes $L(T)$
 
-So,
-$$
+So, $$
 C(T) = \text{Error}(T) + \lambda L(T)
 $$
 
@@ -318,7 +280,6 @@ $$
 Both expressions represent the same concept — a **trade-off between model fit and simplicity**.
 
 ## Example R code for Pre-pruning and Post-pruning
-
 
 ```{r}
 # Load necessary packages
@@ -383,33 +344,29 @@ summary(pruned_tree)
 
 ## Classification Trees: Best Split, Entropy, and Gini Coefficients
 
-Classification trees are used when the response variable is **categorical**.  
+Classification trees are used when the response variable is **categorical**.\
 At each node, the algorithm tries to find the **best split** — the one that produces the most **homogeneous** (pure) child nodes.
-
-
 
 ### The Idea of "Best Split"
 
 At any node in the tree:
 
-- The data are divided into two (or more) groups based on a predictor.
-- The **best split** is the one that makes each resulting group as **pure** as possible with respect to the class labels.
+-   The data are divided into two (or more) groups based on a predictor.
+-   The **best split** is the one that makes each resulting group as **pure** as possible with respect to the class labels.
 
 To measure **purity**, we use **impurity measures** such as:
 
-- **Entropy**
+-   **Entropy**
 
-- **Gini index**
+-   **Gini index**
 
-- (Sometimes) **Misclassification error**
-
-
+-   (Sometimes) **Misclassification error**
 
 ### Entropy
 
 Entropy measures the **disorder** or **uncertainty** in a node.
 
-If there are \( K \) classes and \( p_k \) is the proportion of observations belonging to class \( k \), then:
+If there are ( K ) classes and ( p_k ) is the proportion of observations belonging to class ( k ), then:
 
 $$
 \text{Entropy} = - \sum_{k=1}^{K} p_k \log_2(p_k)
@@ -417,21 +374,19 @@ $$
 
 #### Properties:
 
-- Entropy = 0 → Node is perfectly pure (all observations belong to one class).
-- Entropy is maximum when all classes are equally likely.
+-   Entropy = 0 → Node is perfectly pure (all observations belong to one class).
+-   Entropy is maximum when all classes are equally likely.
 
 #### Example:
 
 | Class | Count | $p_k$ | $-p_k \log_2(p_k)$ |
-|--------|--------|------------|-------------------------|
-| A | 8 | 0.8 | 0.257 |
-| B | 2 | 0.2 | 0.464 |
+|-------|-------|-------|--------------------|
+| A     | 8     | 0.8   | 0.257              |
+| B     | 2     | 0.2   | 0.464              |
 
 $$
 \text{Entropy} = 0.257 + 0.464 = 0.721
 $$
-
-
 
 ### Gini Index
 
@@ -443,19 +398,17 @@ $$
 
 #### Properties:
 
-- Gini = 0 → Perfectly pure node  
+-   Gini = 0 → Perfectly pure node
 
-- Gini is smaller when the node is more homogeneous
+-   Gini is smaller when the node is more homogeneous
 
 #### Example:
 
-Using the same proportions as above \( $p_1 = 0.8, p_2 = 0.2$ \):
+Using the same proportions as above ( $p_1 = 0.8, p_2 = 0.2$ ):
 
 $$
 \text{Gini} = 1 - (0.8^2 + 0.2^2) = 1 - (0.64 + 0.04) = 0.32
 $$
-
-
 
 ### Misclassification Error (less common)
 
@@ -465,39 +418,36 @@ $$
 \text{Error} = 1 - \max(p_k)
 $$
 
-For the same node \( $\max(p_k) = 0.8$ \):
+For the same node ( $\max(p_k) = 0.8$ ):
 
 $$
 \text{Error} = 1 - 0.8 = 0.2
 $$
 
-
 ### Choosing the Best Split
 
 For each possible split:
 
-1. Compute the impurity (Entropy or Gini) **before** splitting — call this $I_{\text{parent}}$.
+1.  Compute the impurity (Entropy or Gini) **before** splitting — call this $I_{\text{parent}}$.
 
-2. Compute the impurity of the **child nodes** (weighted by their sizes):
+2.  Compute the impurity of the **child nodes** (weighted by their sizes):
 
 $$
 I_{\text{split}} = \frac{n_L}{n} I_L + \frac{n_R}{n} I_R
 $$
 
-3. Compute the **information gain** (reduction in impurity):
+3.  Compute the **information gain** (reduction in impurity):
 
 $$
 \text{Gain} = I_{\text{parent}} - I_{\text{split}}
 $$
 
-4. The **best split** is the one that maximizes this gain (i.e., gives the largest reduction in impurity).
-
-
+4.  The **best split** is the one that maximizes this gain (i.e., gives the largest reduction in impurity).
 
 ### Comparing Entropy and Gini
 
 | Property | Entropy | Gini |
-|-----------|----------|------|
+|----|----|----|
 | Range | 0 to 1 | 0 to 0.5 |
 | Shape | Logarithmic | Quadratic |
 | Interpretation | Information theory measure | Probability of misclassification |
@@ -505,4 +455,3 @@ $$
 | Commonly used in | C4.5, ID3 algorithms | CART algorithm |
 
 Both criteria often lead to **similar splits** in practice.
-

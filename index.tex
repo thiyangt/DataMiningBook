@@ -584,8 +584,8 @@ After splitting the data into two nodes, the same process is applied
 \subsection{Summary}\label{summary}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4167}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5833}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Concept
@@ -701,8 +701,8 @@ where:
 Parameters}\label{interpretation-of-parameters}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5455}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4545}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Parameter
@@ -816,12 +816,12 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
     cp = 0.02, maxdepth = 3))
   n= 32 
 
-          CP nsplit rel error    xerror       xstd
-1 0.65266121      0 1.0000000 1.1014883 0.25751457
-2 0.19470235      1 0.3473388 0.5716426 0.15470821
-3 0.03618342      2 0.1526364 0.3772224 0.09990268
-4 0.02324972      3 0.1164530 0.3314091 0.09620281
-5 0.02000000      4 0.0932033 0.3104538 0.09455554
+          CP nsplit rel error    xerror      xstd
+1 0.65266121      0 1.0000000 1.0553028 0.2514193
+2 0.19470235      1 0.3473388 0.6328643 0.1527580
+3 0.03618342      2 0.1526364 0.4517910 0.1013713
+4 0.02324972      3 0.1164530 0.4276611 0.1063841
+5 0.02000000      4 0.0932033 0.4023988 0.1064645
 
 Variable importance
   wt disp   hp drat  cyl qsec   vs 
@@ -932,9 +932,9 @@ Root node error: 1126/32 = 35.189
 n= 32 
 
         CP nsplit rel error  xerror    xstd
-1 0.643125      0   1.00000 1.05398 0.25284
-2 0.097484      1   0.35687 0.66363 0.16803
-3 0.000100      2   0.25939 0.58164 0.11140
+1 0.643125      0   1.00000 1.06344 0.25071
+2 0.097484      1   0.35687 0.63437 0.16356
+3 0.000100      2   0.25939 0.52194 0.11417
 \end{verbatim}
 
 \begin{Shaded}
@@ -974,9 +974,9 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror      xstd
-1 0.64312523      0 1.0000000 1.0539777 0.2528389
-2 0.09748407      1 0.3568748 0.6636336 0.1680308
-3 0.00010000      2 0.2593907 0.5816401 0.1113953
+1 0.64312523      0 1.0000000 1.0634430 0.2507063
+2 0.09748407      1 0.3568748 0.6343677 0.1635632
+3 0.00010000      2 0.2593907 0.5219429 0.1141687
 
 Variable importance
  cyl disp   hp   wt qsec   vs carb 
@@ -1180,9 +1180,9 @@ I_{\text{split}} = \frac{n_L}{n} I_L + \frac{n_R}{n} I_R
 Gini}\label{comparing-entropy-and-gini}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4074}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3704}}
-  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2222}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
 \toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Property
@@ -1205,6 +1205,351 @@ Commonly used in & C4.5, ID3 algorithms & CART algorithm \\
 \end{longtable}
 
 Both criteria often lead to \textbf{similar splits} in practice.
+
+\bookmarksetup{startatroot}
+
+\chapter{Random Forests}\label{random-forests}
+
+\section{Decision trees - Limitation}\label{decision-trees---limitation}
+
+To capture a complex decision boundary we need to use a deep tree
+
+In-class explanation
+
+\section{Bias-Variance Trade off}\label{bias-variance-trade-off}
+
+\begin{itemize}
+\tightlist
+\item
+  A deep decision tree has low bias and high variance.
+\end{itemize}
+
+\pandocbounded{\includegraphics[keepaspectratio]{bv.jpeg}}
+
+\section{Bagging (Bootstrap
+Aggregation)}\label{bagging-bootstrap-aggregation}
+
+\begin{itemize}
+\item
+  Technique for reducing the variance of an estimated predicted function
+\item
+  Works well for high-variance, low-bias procedures, such as trees
+\end{itemize}
+
+\section{Ensemble Methods}\label{ensemble-methods}
+
+\begin{itemize}
+\item
+  Combines several base models
+\item
+  \textbf{Bagg}ing (\textbf{B}ootstrap \textbf{Agg}regation) is an
+  ensemble method
+\end{itemize}
+
+\section{Ensemble Methods}\label{ensemble-methods-1}
+
+``Ensemble learning gives credence to the idea of the ``wisdom of
+crowds,'' which suggests that the decision-making of a larger group of
+people is typically better than that of an individual expert.''
+
+Source: \url{https://www.ibm.com/cloud/learn/boosting}
+
+\section{Bootstrap}\label{bootstrap}
+
+\begin{itemize}
+\tightlist
+\item
+  Generate multiple samples of training data, via bootstrapping
+\end{itemize}
+
+Example
+
+Training data: \(\{(y_1, x_1), (y_2, x_2), (y_3, x_3), (y_4, x_4)\}\)
+
+Three samples generated from bootstrapping
+
+Sample 1 = \(\{(y_1, x_1), (y_2, x_2), (y_3, x_3), (y_4, x_4)\}\)
+
+Sample 2 = \(\{(y_1, x_1), (y_1, x_1), (y_1, x_1), (y_4, x_4)\}\)
+
+Sample 3 = \(\{(y_1, x_1), (y_2, x_2), (y_1, x_1), (y_4, x_4)\}\)
+
+\section{Aggregation}\label{aggregation}
+
+\begin{itemize}
+\item
+  Train a decision tree on each bootstrap sample of data without
+  pruning.
+\item
+  Aggregate prediction using either voting or averaging
+\end{itemize}
+
+\section{Bagging - in class diagram}\label{bagging---in-class-diagram}
+
+\section{Bagging}\label{bagging}
+
+\textbf{Pros}
+
+\begin{itemize}
+\item
+  Ease of implementation
+\item
+  Reduction of variance
+\end{itemize}
+
+\textbf{Cons}
+
+\begin{itemize}
+\item
+  Loss of interpretability
+\item
+  Computationally expensive
+\end{itemize}
+
+\section{Bagging}\label{bagging-1}
+
+\begin{itemize}
+\item
+  Bootstrapped subsamples are created
+\item
+  A Decision Tree is formed on each bootstrapped sample.
+\item
+  The results of each tree are aggregated
+\end{itemize}
+
+\section{Random Forests: Improving on
+Bagging}\label{random-forests-improving-on-bagging}
+
+\begin{itemize}
+\item
+  The ensembles of trees in Bagging tend to be highly correlated.
+\item
+  All of the bagged trees will look quite similar to each other. Hence,
+  the predictions from the bagged trees will be highly correlated.
+\end{itemize}
+
+\section{Random Forests}\label{random-forests-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Bootstrap samples
+\item
+  At each split, randomly select a set of predictors from the full set
+  of predictors
+\item
+  From the selected predictors we select the optimal predictor and the
+  optimal corresponding threshold for the split.
+\item
+  Grow multiple trees and aggregate
+\end{enumerate}
+
+\section{Random Forests - Hyper
+parameters}\label{random-forests---hyper-parameters}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Number of variables randomly sampled as candidates at each split
+\item
+  Number of trees to grow
+\item
+  Minimum size of terminal nodes. Setting this number larger causes
+  smaller trees to be grown (and thus take less time).
+\end{enumerate}
+
+Note: In theory, each tree in the random forest is full (not pruned),
+but in practice this can be computationally expensive,thus, imposing a
+minimum node size is not unusual.
+
+\section{Random Forests}\label{random-forests-2}
+
+\begin{itemize}
+\item
+  Bagging ensemble method
+\item
+  Gives final prediction by aggregating the predictions of bootstrapped
+  decision tree samples.
+\item
+  Trees in a random forest are independent of each other.
+\end{itemize}
+
+\section{Random Forests}\label{random-forests-3}
+
+\textbf{Pros}
+
+\begin{itemize}
+\tightlist
+\item
+  Accuracy
+\end{itemize}
+
+\textbf{Cons}
+
+\begin{itemize}
+\item
+  Speed
+\item
+  Interpretability
+\item
+  Overfitting
+\end{itemize}
+
+\section{Out-of-bag error}\label{out-of-bag-error}
+
+With ensemble methods, we get a new metric for assessing the predictive
+performance of the model, the out-of-bag error
+
+\section{Random Forests}\label{random-forests-4}
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf1.png}}
+
+\section{Random Forests}\label{random-forests-5}
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf2.png}}
+
+\section{Out-of-Bag (OOB) Samples}\label{out-of-bag-oob-samples}
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf3.png}}
+
+\section{Out-of-Bag (OOB) Samples}\label{out-of-bag-oob-samples-1}
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf4.png}}
+
+\section{Predictions based on OOB
+observations}\label{predictions-based-on-oob-observations}
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf5.png}}
+
+\section{Predictions based on OOB
+observations}\label{predictions-based-on-oob-observations-1}
+
+Figure 1
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf6.png}}
+
+Figure 2
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf7.png}}
+
+Figure 3
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf8.png}}
+
+Figure 4
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf9.png}}
+
+Figure 5
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf10.png}}
+
+Figure 6
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf11.png}}
+
+Figure 7
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf12.png}}
+
+Figure 8
+
+\pandocbounded{\includegraphics[keepaspectratio]{rf13.png}}
+
+\section{Variable Importance in Random
+Forest}\label{variable-importance-in-random-forest}
+
+\textbf{contribution to predictive accuracy}
+
+\begin{itemize}
+\item
+  Permutation-based variable importance
+\item
+  Mean decrease in Gini coefficient
+\end{itemize}
+
+\section{Permutation-based variable
+importance}\label{permutation-based-variable-importance}
+
+\begin{itemize}
+\item
+  the OOB samples are passed down the tree, and the prediction accuracy
+  is recorded
+\item
+  the values for the \(j^{th}\) variable are randomly permuted in the
+  OOB samples, and the accuracy is again computed.
+\item
+  the decrease in accuracy as a result of this permuting is averaged
+  over all trees, and is used as a measure of the importance of variable
+  \(j\) in the random forests
+\end{itemize}
+
+\section{Mean decrease in Gini
+coefficient}\label{mean-decrease-in-gini-coefficient}
+
+\begin{itemize}
+\item
+  Measure of how each variable contributes to the homogeneity of the
+  nodes and leaves in the resulting random forest
+\item
+  The higher the value of mean decrease accuracy or mean decrease Gini
+  score, the higher the importance of the variable in the model
+\end{itemize}
+
+\section{Boosting}\label{boosting}
+
+\begin{itemize}
+\item
+  Bagging and boosting are two main types of ensemble learning methods.
+\item
+  The main difference between bagging and boosting is the way in which
+  they are trained.
+\item
+  In bagging, weak learners (decision trees) are trained in parallel,
+  but in boosting, they learn sequentially.
+\end{itemize}
+
+\section{Boosting}\label{boosting-1}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Fit a single tree
+\item
+  Draw a sample that gives higher selection probabilities to
+  misclassified records
+\item
+  Fit a tree to the new sample
+\item
+  Repeat Steps 2 and 3 multiple times
+\item
+  Use weighted voting to classify records, with heavier weights for
+  later trees
+\end{enumerate}
+
+\section{Boosting}\label{boosting-2}
+
+\begin{itemize}
+\item
+  Iterative process.
+\item
+  Each tree is dependent on the previous one. Hence, it is hard to
+  parallelize the training process of boosting algorithms.
+\item
+  The training time will be higher. This is the main drawback of
+  boosting algorithms.
+\end{itemize}
+
+\section{Boosting Algorithms}\label{boosting-algorithms}
+
+\begin{itemize}
+\item
+  Adaptive boosting or AdaBoost
+\item
+  Gradient boosting
+\item
+  Extreme gradient boosting or XGBoost
+\end{itemize}
 
 \bookmarksetup{startatroot}
 
