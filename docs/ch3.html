@@ -707,12 +707,12 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
     cp = 0.02, maxdepth = 3))
   n= 32 
 
-          CP nsplit rel error    xerror       xstd
-1 0.65266121      0 1.0000000 1.0627414 0.25139263
-2 0.19470235      1 0.3473388 0.6279893 0.16030038
-3 0.03618342      2 0.1526364 0.3964079 0.09870545
-4 0.02324972      3 0.1164530 0.3802026 0.09803212
-5 0.02000000      4 0.0932033 0.3851732 0.09711157
+          CP nsplit rel error    xerror      xstd
+1 0.65266121      0 1.0000000 1.0392738 0.2481506
+2 0.19470235      1 0.3473388 0.8770213 0.2246890
+3 0.03618342      2 0.1526364 0.5164251 0.1400914
+4 0.02324972      3 0.1164530 0.5363241 0.1411905
+5 0.02000000      4 0.0932033 0.5011909 0.1295027
 
 Variable importance
   wt disp   hp drat  cyl qsec   vs 
@@ -817,9 +817,9 @@ Root node error: 1126/32 = 35.189
 n= 32 
 
         CP nsplit rel error  xerror    xstd
-1 0.643125      0   1.00000 1.05784 0.25304
-2 0.097484      1   0.35687 0.55432 0.16660
-3 0.000100      2   0.25939 0.45337 0.10827</code></pre>
+1 0.643125      0   1.00000 1.05031 0.25015
+2 0.097484      1   0.35687 0.77306 0.17223
+3 0.000100      2   0.25939 0.67239 0.13511</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Plot cross-validation results</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotcp</span>(full_tree, <span class="at">main =</span> <span class="st">"Cost-Complexity Pruning Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -853,9 +853,9 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror      xstd
-1 0.64312523      0 1.0000000 1.0578364 0.2530370
-2 0.09748407      1 0.3568748 0.5543173 0.1666048
-3 0.00010000      2 0.2593907 0.4533734 0.1082721
+1 0.64312523      0 1.0000000 1.0503089 0.2501533
+2 0.09748407      1 0.3568748 0.7730556 0.1722251
+3 0.00010000      2 0.2593907 0.6723889 0.1351073
 
 Variable importance
  cyl disp   hp   wt qsec   vs carb 

@@ -817,11 +817,11 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror       xstd
-1 0.65266121      0 1.0000000 1.0425061 0.24509628
-2 0.19470235      1 0.3473388 0.6949278 0.17914734
-3 0.03618342      2 0.1526364 0.4175280 0.13271107
-4 0.02324972      3 0.1164530 0.3642353 0.09059916
-5 0.02000000      4 0.0932033 0.3524581 0.09534185
+1 0.65266121      0 1.0000000 1.0532743 0.25701075
+2 0.19470235      1 0.3473388 0.6002473 0.11830747
+3 0.03618342      2 0.1526364 0.3143704 0.06382314
+4 0.02324972      3 0.1164530 0.2865804 0.05941420
+5 0.02000000      4 0.0932033 0.2988887 0.06843228
 
 Variable importance
   wt disp   hp drat  cyl qsec   vs 
@@ -932,9 +932,9 @@ Root node error: 1126/32 = 35.189
 n= 32 
 
         CP nsplit rel error  xerror    xstd
-1 0.643125      0   1.00000 1.03831 0.24176
-2 0.097484      1   0.35687 0.65057 0.16830
-3 0.000100      2   0.25939 0.56072 0.11192
+1 0.643125      0   1.00000 1.08252 0.26021
+2 0.097484      1   0.35687 0.80770 0.18280
+3 0.000100      2   0.25939 0.67304 0.15252
 \end{verbatim}
 
 \begin{Shaded}
@@ -974,9 +974,9 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror      xstd
-1 0.64312523      0 1.0000000 1.0383066 0.2417574
-2 0.09748407      1 0.3568748 0.6505675 0.1683026
-3 0.00010000      2 0.2593907 0.5607231 0.1119227
+1 0.64312523      0 1.0000000 1.0825169 0.2602079
+2 0.09748407      1 0.3568748 0.8076995 0.1828019
+3 0.00010000      2 0.2593907 0.6730430 0.1525172
 
 Variable importance
  cyl disp   hp   wt qsec   vs carb 
@@ -2734,17 +2734,15 @@ Prediction  0  1
   Which of the following statements is true about a Decision Tree?
 \end{enumerate}
 
-\begin{enumerate}
-\def\labelenumi{\Alph{enumi})}
-\item
-  It is an ensemble method combining multiple models
-\item
-  It splits the data based on feature values to create a tree structure
-\item
-  It always gives better accuracy than Random Forest
-\item
-  It cannot be used for classification tasks
-\end{enumerate}
+\begin{verbatim}
+A)  It is an ensemble method combining multiple models
+
+B)  It splits the data based on feature values to create a tree structure
+
+C)  It always gives better accuracy than Random Forest
+
+D)  It cannot be used for classification tasks
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2754,17 +2752,15 @@ Prediction  0  1
   Bagging (Bootstrap Aggregating) primarily helps to:
 \end{enumerate}
 
-\begin{enumerate}
-\def\labelenumi{\Alph{enumi})}
-\item
-  Reduce bias in the model
-\item
-  Reduce variance in the model
-\item
-  Increase the depth of a single decision tree
-\item
-  Select the most important feature only
-\end{enumerate}
+\begin{verbatim}
+A)  Reduce bias in the model
+
+B)  Reduce variance in the model
+
+C)  Increase the depth of a single decision tree
+
+D)  Select the most important feature only
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2774,17 +2770,15 @@ Prediction  0  1
   Random Forest differs from Bagging mainly because it:
 \end{enumerate}
 
-\begin{enumerate}
-\def\labelenumi{\Alph{enumi})}
-\item
-  Uses boosting instead of bagging
-\item
-  Randomly selects a subset of features at each split
-\item
-  Builds only a single decision tree
-\item
-  Increases bias intentionally
-\end{enumerate}
+\begin{verbatim}
+A)  Uses boosting instead of bagging
+
+B)  Randomly selects a subset of features at each split
+
+C)  Builds only a single decision tree
+
+D)  Increases bias intentionally
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2794,18 +2788,15 @@ Prediction  0  1
   AdaBoost works by:
 \end{enumerate}
 
-\begin{enumerate}
-\def\labelenumi{\Alph{enumi})}
-\item
-  Training multiple weak learners sequentially, focusing on
-  misclassified points
-\item
-  Training multiple models independently and averaging predictions
-\item
-  Using only deep decision trees as base learners
-\item
-  Randomly dropping features to reduce correlation
-\end{enumerate}
+\begin{verbatim}
+A)  Training multiple weak learners sequentially, focusing on misclassified points
+
+B)  Training multiple models independently and averaging predictions
+
+C)  Using only deep decision trees as base learners
+
+D)  Randomly dropping features to reduce correlation
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2815,17 +2806,15 @@ Prediction  0  1
   Which of the following is true regarding Random Forest?
 \end{enumerate}
 
-\begin{enumerate}
-\def\labelenumi{\Alph{enumi})}
-\item
-  It is sensitive to outliers
-\item
-  It is a type of boosting method
-\item
-  It reduces overfitting compared to a single decision tree
-\item
-  It cannot handle categorical variables
-\end{enumerate}
+\begin{verbatim}
+A)  It is sensitive to outliers
+
+B)  It is a type of boosting method
+
+C)  It reduces overfitting compared to a single decision tree
+
+D)  It cannot handle categorical variables
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2835,17 +2824,15 @@ Prediction  0  1
   In AdaBoost, the weights of misclassified observations:
 \end{enumerate}
 
-\begin{enumerate}
-\def\labelenumi{\Alph{enumi})}
-\item
-  Decrease in the next iteration
-\item
-  Remain the same
-\item
-  Increase in the next iteration
-\item
-  are ignored
-\end{enumerate}
+\begin{verbatim}
+A)  Decrease in the next iteration
+
+B)  Remain the same
+
+C)  Increase in the next iteration
+
+D)  are ignored
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -2855,17 +2842,15 @@ Prediction  0  1
   Which method is most likely to reduce both variance and overfitting?
 \end{enumerate}
 
-\begin{enumerate}
-\def\labelenumi{\Alph{enumi})}
-\item
-  Single Decision Tree
-\item
-  Bagging
-\item
-  Random Forest
-\item
-  AdaBoost
-\end{enumerate}
+\begin{verbatim}
+A)  Single Decision Tree
+
+B)  Bagging
+
+C)  Random Forest
+
+D)  AdaBoost
+\end{verbatim}
 
 \bookmarksetup{startatroot}
 
