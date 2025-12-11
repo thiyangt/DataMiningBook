@@ -88,5 +88,35 @@
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
     ]
+  },
+  {
+    "objectID": "ch5.html#variable-importance-measures",
+    "href": "ch5.html#variable-importance-measures",
+    "title": "5  Measures of Performance",
+    "section": "5.9 Variable Importance Measures",
+    "text": "5.9 Variable Importance Measures\nRandom Forest provides two widely used importance metrics:\n(a) Mean Decrease in Gini (Gini Importance)\nMeasures how much a variable reduces node impurity (Gini index) across all trees.\n\nVariables used for highly discriminative splits receive larger importance values.\n\nHigher value → more important predictor.\n(b) Mean Decrease in Accuracy (Permutation Importance)\nAfter the model is trained, the values of a variable are randomly permuted.\n\nIf the model accuracy drops significantly, the variable is important.\n\nReflects the predictive power of each variable.\nInterpretation:\nShows which features the random forest relied on most.\n\nimportance(rf_model)\n\n                     Adelie Chinstrap    Gentoo MeanDecreaseAccuracy\nbill_length_mm    95.948710 63.227999 14.989892             85.86134\nbill_depth_mm     20.855953 17.906902 30.126735             35.12314\nflipper_length_mm 18.476543 28.099211 28.799293             34.80012\nbody_mass_g        9.477884 19.466334 15.807238             21.34092\nsex                7.976165  8.382336  6.158169             11.40692\n                  MeanDecreaseGini\nbill_length_mm            57.18023\nbill_depth_mm             28.01945\nflipper_length_mm         44.80369\nbody_mass_g               15.60508\nsex                        1.49749\n\n\n1. Mean Decrease in Accuracy (Permutation Importance)\nThis measures how much the model’s accuracy drops when the values of each variable are randomly permuted. Higher values → more important.\nInterpretation:\nbill_length_mm (85.86) is by far the most important variable.\n→ Shuffling this variable causes a large drop in accuracy.\n→ Species are strongly separated by bill length.\nbill_depth_mm (35.12) and flipper_length_mm (34.80)\n→ Moderately important.\n→ They help the model differentiate species, but less than bill length.\nbody_mass_g (21.34)\n→ Some importance.\n→ Body mass varies between species but overlaps, so it is less discriminative.\nsex (11.41)\n→ Least important.\n→ Sex does not significantly differentiate species\n2. Mean Decrease in Gini (Impurity Importance)\nThis measures how much each variable reduces node impurity in the decision trees. Higher values → variable used for strong, clean splits.\nInterpretation:\nbill_length_mm (57.18)\n→ Most useful for creating pure nodes.\n→ Confirms it is the single best predictor of species.\nflipper_length_mm (44.80)\n→ Also very important for clean splits.\nbill_depth_mm (28.02)\n→ Useful but less than the above.\nbody_mass_g (15.61)\n→ Small contribution.\nsex (1.50)\n→ Barely contributes to splitting.\n→ Almost irrelevant for species classification.\n\nvarImpPlot(rf_model,\n           main = \"Random Forest Variable Importance\",\n           pch = 16,\n           col = \"blue\")",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#ggplot2-variable-importance-plot-gini-importance",
+    "href": "ch5.html#ggplot2-variable-importance-plot-gini-importance",
+    "title": "5  Measures of Performance",
+    "section": "5.10 ggplot2 Variable Importance Plot (Gini Importance)",
+    "text": "5.10 ggplot2 Variable Importance Plot (Gini Importance)\n\nlibrary(ggplot2)\n\nimp &lt;- importance(rf_model)\nimp_df &lt;- data.frame(\n  variable = rownames(imp),\n  MeanDecreaseGini = imp[, \"MeanDecreaseGini\"]\n)\n\nggplot(imp_df, aes(x = reorder(variable, MeanDecreaseGini),\n                   y = MeanDecreaseGini)) +\n  geom_col(fill = \"steelblue\") +\n  coord_flip() +\n  labs(title = \"Random Forest Variable Importance (Mean Decrease Gini)\",\n       x = \"Predictor\",\n       y = \"Importance (Gini)\") +\n  theme_minimal(base_size = 14)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#ggplot2-variable-importance-plot-permutation-importance",
+    "href": "ch5.html#ggplot2-variable-importance-plot-permutation-importance",
+    "title": "5  Measures of Performance",
+    "section": "5.11 ggplot2 Variable Importance Plot (Permutation Importance)",
+    "text": "5.11 ggplot2 Variable Importance Plot (Permutation Importance)\n\nimp2_df &lt;- data.frame(\n  variable = rownames(imp),\n  MeanDecreaseAccuracy = imp[, \"MeanDecreaseAccuracy\"]\n)\n\nggplot(imp2_df, aes(x = reorder(variable, MeanDecreaseAccuracy),\n                    y = MeanDecreaseAccuracy)) +\n  geom_col(fill = \"darkgreen\") +\n  coord_flip() +\n  labs(title = \"Random Forest Variable Importance (Permutation Importance)\",\n       x = \"Predictor\",\n       y = \"Importance (Mean Decrease Accuracy)\") +\n  theme_minimal(base_size = 14)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
   }
 ]

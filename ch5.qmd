@@ -228,3 +228,144 @@ print(roc_manual)
 
 
 ```
+
+## Variable Importance Measures
+
+Random Forest provides two widely used importance metrics:
+
+**(a) Mean Decrease in Gini (Gini Importance)**
+
+    Measures how much a variable reduces node impurity (Gini index) across all trees.
+
+    Variables used for highly discriminative splits receive larger importance values.
+
+    Higher value → more important predictor.
+
+**(b) Mean Decrease in Accuracy (Permutation Importance)**
+
+    After the model is trained, the values of a variable are randomly permuted.
+
+    If the model accuracy drops significantly, the variable is important.
+
+    Reflects the predictive power of each variable.
+
+Interpretation:
+
+Shows which features the random forest relied on most.
+
+```{r, echo=TRUE}
+importance(rf_model)
+```
+
+
+
+**1. Mean Decrease in Accuracy (Permutation Importance)**
+
+This measures how much the model’s accuracy drops when the values of each variable are randomly permuted.
+Higher values → more important.
+
+Interpretation:
+
+bill_length_mm (85.86) is by far the most important variable.
+
+→ Shuffling this variable causes a large drop in accuracy.
+
+→ Species are strongly separated by bill length.
+
+bill_depth_mm (35.12) and flipper_length_mm (34.80)
+
+→ Moderately important.
+
+→ They help the model differentiate species, but less than bill length.
+
+body_mass_g (21.34)
+
+→ Some importance.
+
+→ Body mass varies between species but overlaps, so it is less discriminative.
+
+sex (11.41)
+
+→ Least important.
+
+→ Sex does not significantly differentiate species
+
+**2. Mean Decrease in Gini (Impurity Importance)**
+
+This measures how much each variable reduces node impurity in the decision trees.
+Higher values → variable used for strong, clean splits.
+
+Interpretation:
+
+bill_length_mm (57.18)
+
+→ Most useful for creating pure nodes.
+
+→ Confirms it is the single best predictor of species.
+
+flipper_length_mm (44.80)
+
+→ Also very important for clean splits.
+
+bill_depth_mm (28.02)
+
+→ Useful but less than the above.
+
+body_mass_g (15.61)
+
+→ Small contribution.
+
+sex (1.50)
+
+→ Barely contributes to splitting.
+
+→ Almost irrelevant for species classification.
+
+```{r, echo=TRUE}
+varImpPlot(rf_model,
+           main = "Random Forest Variable Importance",
+           pch = 16,
+           col = "blue")
+
+```
+
+## ggplot2 Variable Importance Plot (Gini Importance)
+
+```{r, echo=TRUE}
+library(ggplot2)
+
+imp <- importance(rf_model)
+imp_df <- data.frame(
+  variable = rownames(imp),
+  MeanDecreaseGini = imp[, "MeanDecreaseGini"]
+)
+
+ggplot(imp_df, aes(x = reorder(variable, MeanDecreaseGini),
+                   y = MeanDecreaseGini)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(title = "Random Forest Variable Importance (Mean Decrease Gini)",
+       x = "Predictor",
+       y = "Importance (Gini)") +
+  theme_minimal(base_size = 14)
+
+```
+
+## ggplot2 Variable Importance Plot (Permutation Importance)
+
+```{r, echo=TRUE}
+imp2_df <- data.frame(
+  variable = rownames(imp),
+  MeanDecreaseAccuracy = imp[, "MeanDecreaseAccuracy"]
+)
+
+ggplot(imp2_df, aes(x = reorder(variable, MeanDecreaseAccuracy),
+                    y = MeanDecreaseAccuracy)) +
+  geom_col(fill = "darkgreen") +
+  coord_flip() +
+  labs(title = "Random Forest Variable Importance (Permutation Importance)",
+       x = "Predictor",
+       y = "Importance (Mean Decrease Accuracy)") +
+  theme_minimal(base_size = 14)
+
+```

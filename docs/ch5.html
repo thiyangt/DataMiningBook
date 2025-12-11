@@ -232,6 +232,9 @@ window.Quarto = {
   <li><a href="#metric-formula" id="toc-metric-formula" class="nav-link" data-scroll-target="#metric-formula"><span class="header-section-number">5.7.1</span> Metric Formula</a></li>
   </ul></li>
   <li><a href="#illustration-of-how-roc-curves-are-plotted" id="toc-illustration-of-how-roc-curves-are-plotted" class="nav-link" data-scroll-target="#illustration-of-how-roc-curves-are-plotted"><span class="header-section-number">5.8</span> Illustration of How ROC Curves Are Plotted</a></li>
+  <li><a href="#variable-importance-measures" id="toc-variable-importance-measures" class="nav-link" data-scroll-target="#variable-importance-measures"><span class="header-section-number">5.9</span> Variable Importance Measures</a></li>
+  <li><a href="#ggplot2-variable-importance-plot-gini-importance" id="toc-ggplot2-variable-importance-plot-gini-importance" class="nav-link" data-scroll-target="#ggplot2-variable-importance-plot-gini-importance"><span class="header-section-number">5.10</span> ggplot2 Variable Importance Plot (Gini Importance)</a></li>
+  <li><a href="#ggplot2-variable-importance-plot-permutation-importance" id="toc-ggplot2-variable-importance-plot-permutation-importance" class="nav-link" data-scroll-target="#ggplot2-variable-importance-plot-permutation-importance"><span class="header-section-number">5.11</span> ggplot2 Variable Importance Plot (Permutation Importance)</a></li>
   </ul>
 </nav>
     </div>
@@ -716,6 +719,137 @@ $ actual            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 
 9        0.8   0   0
 10       0.9   0   0
 11       1.0   0   0</code></pre>
+</div>
+</div>
+</section>
+<section id="variable-importance-measures" class="level2" data-number="5.9">
+<h2 data-number="5.9" class="anchored" data-anchor-id="variable-importance-measures"><span class="header-section-number">5.9</span> Variable Importance Measures</h2>
+<p>Random Forest provides two widely used importance metrics:</p>
+<p><strong>(a) Mean Decrease in Gini (Gini Importance)</strong></p>
+<pre><code>Measures how much a variable reduces node impurity (Gini index) across all trees.
+
+Variables used for highly discriminative splits receive larger importance values.
+
+Higher value → more important predictor.</code></pre>
+<p><strong>(b) Mean Decrease in Accuracy (Permutation Importance)</strong></p>
+<pre><code>After the model is trained, the values of a variable are randomly permuted.
+
+If the model accuracy drops significantly, the variable is important.
+
+Reflects the predictive power of each variable.</code></pre>
+<p>Interpretation:</p>
+<p>Shows which features the random forest relied on most.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">importance</span>(rf_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     Adelie Chinstrap    Gentoo MeanDecreaseAccuracy
+bill_length_mm    95.948710 63.227999 14.989892             85.86134
+bill_depth_mm     20.855953 17.906902 30.126735             35.12314
+flipper_length_mm 18.476543 28.099211 28.799293             34.80012
+body_mass_g        9.477884 19.466334 15.807238             21.34092
+sex                7.976165  8.382336  6.158169             11.40692
+                  MeanDecreaseGini
+bill_length_mm            57.18023
+bill_depth_mm             28.01945
+flipper_length_mm         44.80369
+body_mass_g               15.60508
+sex                        1.49749</code></pre>
+</div>
+</div>
+<p><strong>1. Mean Decrease in Accuracy (Permutation Importance)</strong></p>
+<p>This measures how much the model’s accuracy drops when the values of each variable are randomly permuted. Higher values → more important.</p>
+<p>Interpretation:</p>
+<p>bill_length_mm (85.86) is by far the most important variable.</p>
+<p>→ Shuffling this variable causes a large drop in accuracy.</p>
+<p>→ Species are strongly separated by bill length.</p>
+<p>bill_depth_mm (35.12) and flipper_length_mm (34.80)</p>
+<p>→ Moderately important.</p>
+<p>→ They help the model differentiate species, but less than bill length.</p>
+<p>body_mass_g (21.34)</p>
+<p>→ Some importance.</p>
+<p>→ Body mass varies between species but overlaps, so it is less discriminative.</p>
+<p>sex (11.41)</p>
+<p>→ Least important.</p>
+<p>→ Sex does not significantly differentiate species</p>
+<p><strong>2. Mean Decrease in Gini (Impurity Importance)</strong></p>
+<p>This measures how much each variable reduces node impurity in the decision trees. Higher values → variable used for strong, clean splits.</p>
+<p>Interpretation:</p>
+<p>bill_length_mm (57.18)</p>
+<p>→ Most useful for creating pure nodes.</p>
+<p>→ Confirms it is the single best predictor of species.</p>
+<p>flipper_length_mm (44.80)</p>
+<p>→ Also very important for clean splits.</p>
+<p>bill_depth_mm (28.02)</p>
+<p>→ Useful but less than the above.</p>
+<p>body_mass_g (15.61)</p>
+<p>→ Small contribution.</p>
+<p>sex (1.50)</p>
+<p>→ Barely contributes to splitting.</p>
+<p>→ Almost irrelevant for species classification.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">varImpPlot</span>(rf_model,</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">main =</span> <span class="st">"Random Forest Variable Importance"</span>,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">pch =</span> <span class="dv">16</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ch5_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ggplot2-variable-importance-plot-gini-importance" class="level2" data-number="5.10">
+<h2 data-number="5.10" class="anchored" data-anchor-id="ggplot2-variable-importance-plot-gini-importance"><span class="header-section-number">5.10</span> ggplot2 Variable Importance Plot (Gini Importance)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>imp <span class="ot">&lt;-</span> <span class="fu">importance</span>(rf_model)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>imp_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">rownames</span>(imp),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">MeanDecreaseGini =</span> imp[, <span class="st">"MeanDecreaseGini"</span>]</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(imp_df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, MeanDecreaseGini),</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">y =</span> MeanDecreaseGini)) <span class="sc">+</span></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Random Forest Variable Importance (Mean Decrease Gini)"</span>,</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Importance (Gini)"</span>) <span class="sc">+</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ch5_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="ggplot2-variable-importance-plot-permutation-importance" class="level2" data-number="5.11">
+<h2 data-number="5.11" class="anchored" data-anchor-id="ggplot2-variable-importance-plot-permutation-importance"><span class="header-section-number">5.11</span> ggplot2 Variable Importance Plot (Permutation Importance)</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>imp2_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable =</span> <span class="fu">rownames</span>(imp),</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">MeanDecreaseAccuracy =</span> imp[, <span class="st">"MeanDecreaseAccuracy"</span>]</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(imp2_df, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, MeanDecreaseAccuracy),</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">y =</span> MeanDecreaseAccuracy)) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"darkgreen"</span>) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Random Forest Variable Importance (Permutation Importance)"</span>,</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Predictor"</span>,</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Importance (Mean Decrease Accuracy)"</span>) <span class="sc">+</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ch5_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 
