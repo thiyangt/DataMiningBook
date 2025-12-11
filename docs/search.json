@@ -1,0 +1,92 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Mining",
+    "section": "",
+    "text": "Preface",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "ch5.html",
+    "href": "ch5.html",
+    "title": "5  Measures of Performance",
+    "section": "",
+    "text": "5.1 Load libraries\nTask: Build a tree-based model to predict species\nlibrary(palmerpenguins)\nlibrary(rsample)       # for initial_split\nlibrary(dplyr)\nlibrary(caret)\nlibrary(randomForest)\nlibrary(ada)\nlibrary(gbm)\nlibrary(tidyverse)\nlibrary(yardstick) #roc_curve",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#clean-data",
+    "href": "ch5.html#clean-data",
+    "title": "5  Measures of Performance",
+    "section": "5.2 Clean data",
+    "text": "5.2 Clean data\n\npenguins_clean &lt;- na.omit(penguins)\npenguins_clean$species &lt;- as.factor(penguins_clean$species)",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#stratified-train-test-split",
+    "href": "ch5.html#stratified-train-test-split",
+    "title": "5  Measures of Performance",
+    "section": "5.3 Stratified train-test split",
+    "text": "5.3 Stratified train-test split\n\nset.seed(123)\nsplit &lt;- initial_split(penguins_clean, prop = 0.7, strata = \"species\")\ntrain_data &lt;- training(split)\ntable(train_data$species)\n\n\n   Adelie Chinstrap    Gentoo \n      102        47        83 \n\ntest_data  &lt;- testing(split)\ntable(test_data$species)\n\n\n   Adelie Chinstrap    Gentoo \n       44        21        36",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#variables",
+    "href": "ch5.html#variables",
+    "title": "5  Measures of Performance",
+    "section": "5.4 Variables",
+    "text": "5.4 Variables\n\npredictors &lt;- c(\"bill_length_mm\", \"bill_depth_mm\", \"flipper_length_mm\", \"body_mass_g\", \"sex\")\nresponse &lt;- \"species\"",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#random-forest-model",
+    "href": "ch5.html#random-forest-model",
+    "title": "5  Measures of Performance",
+    "section": "5.5 Random Forest Model",
+    "text": "5.5 Random Forest Model\n\nset.seed(123)\nrf_model &lt;- randomForest(\n  as.formula(paste(response, \"~\", paste(predictors, collapse = \"+\"))),\n  data = train_data,\n  importance = TRUE\n)\nrf_model\n\n\nCall:\n randomForest(formula = as.formula(paste(response, \"~\", paste(predictors,      collapse = \"+\"))), data = train_data, importance = TRUE) \n               Type of random forest: classification\n                     Number of trees: 500\nNo. of variables tried at each split: 2\n\n        OOB estimate of  error rate: 3.45%\nConfusion matrix:\n          Adelie Chinstrap Gentoo class.error\nAdelie       100         1      1  0.01960784\nChinstrap      4        42      1  0.10638298\nGentoo         0         1     82  0.01204819\n\nrf_pred &lt;- predict(rf_model, newdata = test_data)\nrf_pred \n\n        1         2         3         4         5         6         7         8 \n   Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie \n        9        10        11        12        13        14        15        16 \n   Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie \n       17        18        19        20        21        22        23        24 \n   Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie \n       25        26        27        28        29        30        31        32 \n   Adelie Chinstrap    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie \n       33        34        35        36        37        38        39        40 \n   Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie \n       41        42        43        44        45        46        47        48 \n   Adelie    Adelie    Adelie    Adelie    Gentoo    Gentoo    Gentoo    Gentoo \n       49        50        51        52        53        54        55        56 \n   Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo \n       57        58        59        60        61        62        63        64 \n   Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo \n       65        66        67        68        69        70        71        72 \n   Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo \n       73        74        75        76        77        78        79        80 \n   Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo \n       81        82        83        84        85        86        87        88 \nChinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap \n       89        90        91        92        93        94        95        96 \nChinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap \n       97        98        99       100       101 \nChinstrap Chinstrap Chinstrap Chinstrap Chinstrap \nLevels: Adelie Chinstrap Gentoo\n\nrf_cm &lt;- confusionMatrix(rf_pred, test_data$species)\nprint(rf_cm)\n\nConfusion Matrix and Statistics\n\n           Reference\nPrediction  Adelie Chinstrap Gentoo\n  Adelie        43         0      0\n  Chinstrap      1        21      0\n  Gentoo         0         0     36\n\nOverall Statistics\n                                          \n               Accuracy : 0.9901          \n                 95% CI : (0.9461, 0.9997)\n    No Information Rate : 0.4356          \n    P-Value [Acc &gt; NIR] : &lt; 2.2e-16       \n                                          \n                  Kappa : 0.9846          \n                                          \n Mcnemar's Test P-Value : NA              \n\nStatistics by Class:\n\n                     Class: Adelie Class: Chinstrap Class: Gentoo\nSensitivity                 0.9773           1.0000        1.0000\nSpecificity                 1.0000           0.9875        1.0000\nPos Pred Value              1.0000           0.9545        1.0000\nNeg Pred Value              0.9828           1.0000        1.0000\nPrevalence                  0.4356           0.2079        0.3564\nDetection Rate              0.4257           0.2079        0.3564\nDetection Prevalence        0.4257           0.2178        0.3564\nBalanced Accuracy           0.9886           0.9938        1.0000",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#exercise",
+    "href": "ch5.html#exercise",
+    "title": "5  Measures of Performance",
+    "section": "5.6 Exercise",
+    "text": "5.6 Exercise\nCompute the following measures manually and interpret them.\n\nSensitivity\nSpecificity\nPrevalence\nPositive Prediction Value (PPV)\nNegative Prediction Value (NPV)\nDetection rate\nDetection prevalence\nBalanced accuracy\nPrecision\nRecall\nF1 score",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#receiver-operating-characteristic-roc-curves",
+    "href": "ch5.html#receiver-operating-characteristic-roc-curves",
+    "title": "5  Measures of Performance",
+    "section": "5.7 Receiver Operating Characteristic (ROC) curves",
+    "text": "5.7 Receiver Operating Characteristic (ROC) curves\nROC curves are normally for binary classification, but penguins$species has three classes. For multiclass ROC, we compute one-vs-all ROC curves.\nIt’s a plot of:\n\nTrue Positive Rate (TPR / Sensitivity) on the y-axis\nFalse Positive Rate (FPR = 1 - Specificity) on the x-axis\nIt shows the trade-off between sensitivity and specificity for different decision thresholds of a classifier.\n\n\n5.7.1 Metric Formula\nTrue Positive Rate (Sensitivity)\n\\[TPR = TP / (TP + FN)\\]\nFalse Positive Rate\n\\[FPR = FP / (FP + TN)\\]\nSpecificity\n\\[TN / (TN + FP) = 1 − FPR\\]\nWhere:\n\\(TP\\) = True Positives\n\\(FP\\) = False Positives\n\\(TN\\) = True Negatives\n\\(FN\\) = False Negatives\n\n# Predict class probabilities\nrf_prob &lt;- predict(rf_model, newdata = test_data, type = \"prob\")\nrf_prob\n\n    Adelie Chinstrap Gentoo\n1    0.978     0.022  0.000\n2    0.924     0.076  0.000\n3    0.990     0.010  0.000\n4    0.976     0.024  0.000\n5    0.972     0.028  0.000\n6    0.994     0.006  0.000\n7    0.994     0.006  0.000\n8    0.964     0.036  0.000\n9    0.994     0.006  0.000\n10   0.984     0.016  0.000\n11   0.718     0.280  0.002\n12   0.998     0.002  0.000\n13   0.998     0.002  0.000\n14   0.994     0.006  0.000\n15   0.952     0.048  0.000\n16   0.966     0.034  0.000\n17   1.000     0.000  0.000\n18   0.996     0.004  0.000\n19   0.966     0.034  0.000\n20   0.992     0.008  0.000\n21   0.894     0.068  0.038\n22   0.984     0.016  0.000\n23   0.990     0.010  0.000\n24   1.000     0.000  0.000\n25   0.974     0.026  0.000\n26   0.262     0.734  0.004\n27   0.802     0.196  0.002\n28   0.864     0.088  0.048\n29   0.978     0.022  0.000\n30   0.934     0.060  0.006\n31   0.980     0.020  0.000\n32   0.750     0.250  0.000\n33   0.986     0.014  0.000\n34   0.998     0.002  0.000\n35   0.982     0.018  0.000\n36   0.968     0.032  0.000\n37   0.988     0.012  0.000\n38   0.998     0.002  0.000\n39   1.000     0.000  0.000\n40   0.980     0.020  0.000\n41   0.986     0.014  0.000\n42   0.990     0.010  0.000\n43   0.958     0.042  0.000\n44   0.898     0.060  0.042\n45   0.000     0.000  1.000\n46   0.000     0.004  0.996\n47   0.000     0.000  1.000\n48   0.000     0.000  1.000\n49   0.002     0.006  0.992\n50   0.006     0.014  0.980\n51   0.000     0.000  1.000\n52   0.000     0.012  0.988\n53   0.000     0.000  1.000\n54   0.000     0.004  0.996\n55   0.016     0.008  0.976\n56   0.000     0.000  1.000\n57   0.000     0.000  1.000\n58   0.014     0.004  0.982\n59   0.016     0.026  0.958\n60   0.000     0.000  1.000\n61   0.002     0.008  0.990\n62   0.004     0.026  0.970\n63   0.002     0.000  0.998\n64   0.000     0.000  1.000\n65   0.000     0.000  1.000\n66   0.000     0.000  1.000\n67   0.000     0.004  0.996\n68   0.000     0.000  1.000\n69   0.000     0.000  1.000\n70   0.000     0.000  1.000\n71   0.000     0.000  1.000\n72   0.000     0.002  0.998\n73   0.000     0.000  1.000\n74   0.000     0.000  1.000\n75   0.002     0.006  0.992\n76   0.012     0.020  0.968\n77   0.000     0.000  1.000\n78   0.000     0.000  1.000\n79   0.000     0.000  1.000\n80   0.000     0.000  1.000\n81   0.018     0.982  0.000\n82   0.032     0.968  0.000\n83   0.040     0.960  0.000\n84   0.022     0.978  0.000\n85   0.162     0.838  0.000\n86   0.052     0.944  0.004\n87   0.038     0.958  0.004\n88   0.070     0.920  0.010\n89   0.030     0.966  0.004\n90   0.204     0.794  0.002\n91   0.030     0.966  0.004\n92   0.036     0.940  0.024\n93   0.026     0.968  0.006\n94   0.334     0.506  0.160\n95   0.022     0.976  0.002\n96   0.250     0.456  0.294\n97   0.004     0.990  0.006\n98   0.030     0.966  0.004\n99   0.034     0.960  0.006\n100  0.202     0.722  0.076\n101  0.328     0.474  0.198\nattr(,\"class\")\n[1] \"matrix\" \"array\"  \"votes\" \n\n\n\n# Combine predicted probabilities with true labels for tidymodels\nrf_results &lt;- test_data %&gt;%\n  select(species) %&gt;%\n  bind_cols(as.data.frame(rf_prob))\nrf_results\n\n# A tibble: 101 × 4\n   species Adelie Chinstrap Gentoo\n * &lt;fct&gt;    &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;\n 1 Adelie   0.978     0.022      0\n 2 Adelie   0.924     0.076      0\n 3 Adelie   0.99      0.01       0\n 4 Adelie   0.976     0.024      0\n 5 Adelie   0.972     0.028      0\n 6 Adelie   0.994     0.006      0\n 7 Adelie   0.994     0.006      0\n 8 Adelie   0.964     0.036      0\n 9 Adelie   0.994     0.006      0\n10 Adelie   0.984     0.016      0\n# ℹ 91 more rows\n\n\n\n# Compute ROC curves\n# roc_curve() for multiclass expects:\n# truth column and all class probability columns\nroc_data &lt;- rf_results %&gt;%\n  roc_curve(truth = species, Adelie, Chinstrap, Gentoo) \nroc_data\n\n# A tibble: 129 × 4\n   .level .threshold specificity sensitivity\n   &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;\n 1 Adelie   -Inf           0               1\n 2 Adelie      0           0               1\n 3 Adelie      0.002       0.456           1\n 4 Adelie      0.004       0.526           1\n 5 Adelie      0.006       0.561           1\n 6 Adelie      0.012       0.579           1\n 7 Adelie      0.014       0.596           1\n 8 Adelie      0.016       0.614           1\n 9 Adelie      0.018       0.649           1\n10 Adelie      0.022       0.667           1\n# ℹ 119 more rows\n\n\n\n# Plot ROC curves\nroc_data |&gt; autoplot()  \n\n\n\n\n\n\n\n\n\n# Compute AUC for each class\nauc_data &lt;- rf_results |&gt;\n  roc_auc(truth = species, Adelie, Chinstrap, Gentoo)\nauc_data\n\n# A tibble: 1 × 3\n  .metric .estimator .estimate\n  &lt;chr&gt;   &lt;chr&gt;          &lt;dbl&gt;\n1 roc_auc hand_till      0.999",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  },
+  {
+    "objectID": "ch5.html#illustration-of-how-roc-curves-are-plotted",
+    "href": "ch5.html#illustration-of-how-roc-curves-are-plotted",
+    "title": "5  Measures of Performance",
+    "section": "5.8 Illustration of How ROC Curves Are Plotted",
+    "text": "5.8 Illustration of How ROC Curves Are Plotted\nLet’s do that for one species (Adelie) vs others, using predicted probabilities from a Random Forest.\n\ntest_data_adelie &lt;- test_data |&gt;\n  mutate(actual = ifelse(species == \"Adelie\", 1, 0))\ntest_data_adelie |&gt; glimpse()\n\nRows: 101\nColumns: 9\n$ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel…\n$ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Biscoe, …\n$ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 39.3, 36.6, 37.7, 35.9, 38.2, 38.8, 37.9…\n$ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 20.6, 17.8, 18.7, 19.2, 18.1, 17.2, 18.6…\n$ flipper_length_mm &lt;int&gt; 181, 186, 190, 185, 180, 189, 185, 180, 172, 188, 18…\n$ body_mass_g       &lt;int&gt; 3750, 3800, 3650, 3700, 3600, 3800, 3950, 3800, 3150…\n$ sex               &lt;fct&gt; male, female, male, female, male, female, male, male…\n$ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007…\n$ actual            &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…\n\n\nWe can calculate TPR and FPR at different thresholds:\n\nthresholds &lt;- seq(0, 1, by = 0.1)  # thresholds from 0 to 1\nroc_manual &lt;- data.frame(threshold = thresholds, TPR = NA, FPR = NA)\n\nfor (i in seq_along(thresholds)) {\n  thresh &lt;- thresholds[i]\n  \n  # Predicted class based on threshold\n  pred_class &lt;- ifelse(test_data$pred_adelie &gt;= thresh, 1, 0)\n  \n  # Confusion matrix components\n  TP &lt;- sum(pred_class == 1 & test_data$actual == 1)\n  FP &lt;- sum(pred_class == 1 & test_data$actual == 0)\n  FN &lt;- sum(pred_class == 0 & test_data$actual == 1)\n  TN &lt;- sum(pred_class == 0 & test_data$actual == 0)\n  \n  # Compute TPR and FPR\n  roc_manual$TPR[i] &lt;- TP / (TP + FN)\n  roc_manual$FPR[i] &lt;- FP / (FP + TN)\n}\n\nroc_manual\n\n   threshold TPR FPR\n1        0.0 NaN NaN\n2        0.1 NaN NaN\n3        0.2 NaN NaN\n4        0.3 NaN NaN\n5        0.4 NaN NaN\n6        0.5 NaN NaN\n7        0.6 NaN NaN\n8        0.7 NaN NaN\n9        0.8 NaN NaN\n10       0.9 NaN NaN\n11       1.0 NaN NaN\n\n\nThe NaN (Not a Number) appears because some thresholds may produce divisions by zero, typically when (TP + FN) or (FP + TN) is zero. This can happen if the classifier predicts all 0s or all 1s for extreme thresholds (0 or 1).\n\nthresholds &lt;- seq(0, 1, by = 0.1)  # thresholds from 0 to 1\nroc_manual &lt;- data.frame(threshold = thresholds, TPR = NA, FPR = NA)\n\nfor (i in seq_along(thresholds)) {\n  thresh &lt;- thresholds[i]\n  \n  # Predicted class based on threshold\n  pred_class &lt;- ifelse(test_data$pred_adelie &gt;= thresh, 1, 0)\n  \n  # Confusion matrix components\n  TP &lt;- sum(pred_class == 1 & test_data$actual == 1)\n  FP &lt;- sum(pred_class == 1 & test_data$actual == 0)\n  FN &lt;- sum(pred_class == 0 & test_data$actual == 1)\n  TN &lt;- sum(pred_class == 0 & test_data$actual == 0)\n  \n  # Compute TPR safely\n  roc_manual$TPR[i] &lt;- if ((TP + FN) == 0) 0 else TP / (TP + FN)\n  roc_manual$FPR[i] &lt;- if ((FP + TN) == 0) 0 else FP / (FP + TN)\n}\n\nprint(roc_manual)\n\n   threshold TPR FPR\n1        0.0   0   0\n2        0.1   0   0\n3        0.2   0   0\n4        0.3   0   0\n5        0.4   0   0\n6        0.5   0   0\n7        0.6   0   0\n8        0.7   0   0\n9        0.8   0   0\n10       0.9   0   0\n11       1.0   0   0",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
+    ]
+  }
+]

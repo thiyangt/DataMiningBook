@@ -2,8 +2,6 @@
 title: "Random Forests"
 ---
 
-
-
 ## Decision trees - Limitation
 
 To capture a complex decision boundary we need to use a deep tree

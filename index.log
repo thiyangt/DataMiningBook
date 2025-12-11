@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.10.25)  25 OCT 2025 05:32
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.11.27)  11 DEC 2025 17:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **index.tex
 (./index.tex
-LaTeX2e <2025-06-01> patch level 1
-L3 programming layer <2025-10-09>
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-11-14>
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrreprt.cls
 Document Class: scrreprt 2025/09/09 v3.48 KOMA-Script document class (report)
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -122,7 +122,7 @@ Package tocbasic Info: omitting babel extension for `lot'
 Class scrreprt Info: Redefining `\numberline' on input line 7532.
 \bibindent=\dimen148
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2025/06/16 v2.17y AMS math features
+Package: amsmath 2025/07/09 v2.17z AMS math features
 \@mathmargin=\skip66
 For additional information on amsmath, use the `?' option.
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
@@ -182,8 +182,8 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \multlinegap=\skip67
 \multlinetaggap=\skip68
 \mathdisplay@stack=\toks22
-LaTeX Info: Redefining \[ on input line 2949.
-LaTeX Info: Redefining \] on input line 2950.
+LaTeX Info: Redefining \[ on input line 2950.
+LaTeX Info: Redefining \] on input line 2951.
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
@@ -196,7 +196,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 )) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2025-10-09 L3 programming layer (loader) 
+Package: expl3 2025-11-14 L3 programming layer (loader) 
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2025-10-09 L3 backend support: XeTeX
 \g__graphics_track_int=\count293
@@ -229,7 +229,7 @@ Package: fontspec-xetex 2025/09/29 v2.9g Font selection for XeLaTeX and LuaLaTeX
 \l__fontspec_tmpb_dim=\dimen159
 \l__fontspec_tmpc_dim=\dimen160
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2024/12/21 v2.1c Standard LaTeX package
+Package: fontenc 2025/07/18 v2.1d Standard LaTeX package
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
 Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
@@ -437,7 +437,7 @@ File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: xetex.def on input line 274.
 (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
-File: xetex.def 2025/09/29 v5.0o Graphics/color driver for xetex
+File: xetex.def 2025/11/01 v5.0p Graphics/color driver for xetex
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
 Package xcolor Info: Model `RGB' extended on input line 1365.
@@ -469,7 +469,7 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \FrameRule=\dimen164
 \FrameSep=\dimen165
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2024-12-18 v4.23 Multi-page Table package (DPC)
+Package: longtable 2025-10-13 v4.24 Multi-page Table package (DPC)
 \LTleft=\skip71
 \LTright=\skip72
 \LTpre=\skip73
@@ -508,7 +508,7 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@lastruleclass=\count324
 \@thisrulewidth=\dimen179
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
-Package: array 2025/06/08 v2.6j Tabular extension package (FMi)
+Package: array 2025/09/25 v2.6n Tabular extension package (FMi)
 \col@sep=\dimen180
 \ar@mcellbox=\box64
 \extrarowheight=\dimen181
@@ -1011,9 +1011,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 237.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (c:/Users/DELL/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-
-[1
+) [1
 
 
 
@@ -1023,50 +1021,36 @@ No file index.toc.
 \tf@toc=\write4
 \openout4 = `index.toc'.
 
-
-
 [2
 
-]
-
-[3
+] [3
 
 ]
 chapter 1.
-
-
 [4
 
-]
-
-[5]
+] [5]
 chapter 2.
-
-
 [6
 
 ]
 chapter 3.
 File: ch3_files/figure-pdf/unnamed-chunk-1-1.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-1-1.pdf>
+<use ch3_files/figure-pdf/unnamed-chunk-1-1.pdf>
 
 Overfull \hbox (10.96523pt too wide) in paragraph at lines 379--380
 [] 
  []
 
 File: ch3_files/figure-pdf/unnamed-chunk-2-1.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-2-1.pdf>
-
-
+<use ch3_files/figure-pdf/unnamed-chunk-2-1.pdf>
 [7
 
 ]
 File: ch3_files/figure-pdf/unnamed-chunk-3-1.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-3-1.pdf>
+<use ch3_files/figure-pdf/unnamed-chunk-3-1.pdf>
 File: ch3_files/figure-pdf/unnamed-chunk-4-1.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-4-1.pdf>
-
-
+<use ch3_files/figure-pdf/unnamed-chunk-4-1.pdf>
 [8]
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
 (Font)              scaled to size 7.665pt on input line 391.
@@ -1084,15 +1068,7 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 7.66417pt on input line 391.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 (Font)              scaled to size 5.47441pt on input line 391.
-
-
-[9]
-
-[10]
-
-[11]
-
-[12]
+[9] [10] [11] [12]
 Underfull \hbox (badness 10000) in paragraph at lines 574--576
 
  []
@@ -1108,21 +1084,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 578--580
  []
 
 File: ch3_files/figure-pdf/unnamed-chunk-5-1.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-5-1.pdf>
+<use ch3_files/figure-pdf/unnamed-chunk-5-1.pdf>
 File: ch3_files/figure-pdf/unnamed-chunk-5-2.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-5-2.pdf>
-
-
+<use ch3_files/figure-pdf/unnamed-chunk-5-2.pdf>
 [13]
 File: ch3_files/figure-pdf/unnamed-chunk-6-1.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-6-1.pdf>
+<use ch3_files/figure-pdf/unnamed-chunk-6-1.pdf>
 File: ch3_files/figure-pdf/unnamed-chunk-6-2.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-6-2.pdf>
-
-
-[14]
-
-[15]
+<use ch3_files/figure-pdf/unnamed-chunk-6-2.pdf>
+[14] [15]
 Underfull \hbox (badness 10000) in paragraph at lines 641--643
 
  []
@@ -1131,8 +1101,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 641--643
 Underfull \hbox (badness 10000) in paragraph at lines 643--645
 
  []
-
-
 
 [16]
 Underfull \hbox (badness 10000) in paragraph at lines 692--694
@@ -1149,26 +1117,16 @@ Underfull \hbox (badness 10000) in paragraph at lines 731--733
 
  []
 
-
-
 [17]
 Missing character: There is no 🌱 (U+1F331) in font [lmmono10-regular]:!
 File: ch3_files/figure-pdf/unnamed-chunk-7-1.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-7-1.pdf>
-
-
+<use ch3_files/figure-pdf/unnamed-chunk-7-1.pdf>
 [18]
 Overfull \hbox (105.11983pt too wide) in paragraph at lines 902--902
 []\TU/lmtt/m/n/10.95 rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.control(minsplit = 10,[] 
  []
 
-
-
-[19]
-
-[20]
-
-[21]
+[19] [20] [21]
 Missing character: There is no 🌳 (U+1F333) in font [lmmono10-regular]:!
 
 Overfull \hbox (93.62234pt too wide) in paragraph at lines 938--938
@@ -1176,35 +1134,21 @@ Overfull \hbox (93.62234pt too wide) in paragraph at lines 938--938
  []
 
 File: ch3_files/figure-pdf/unnamed-chunk-7-2.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-7-2.pdf>
-
-
+<use ch3_files/figure-pdf/unnamed-chunk-7-2.pdf>
 [22]
 File: ch3_files/figure-pdf/unnamed-chunk-7-3.pdf Graphic file (type pdf)
-<ch3_files/figure-pdf/unnamed-chunk-7-3.pdf>
-
-
+<use ch3_files/figure-pdf/unnamed-chunk-7-3.pdf>
 [23]
 Overfull \hbox (93.62234pt too wide) in paragraph at lines 1025--1025
 []\TU/lmtt/m/n/10.95 rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.control(cp = 1e-04))[] 
  []
 
-
-
-[24]
-
-[25]
+[24] [25]
 
 Package longtable Warning: Column widths have changed
 (longtable)                in table 3.4 on input line 1093.
 
-
-
-[26]
-
-[27]
-
-[28]
+[26] [27] [28]
 chapter 4.
 File: bv.jpeg Graphic file (type bmp)
 <bv.jpeg>
@@ -1213,25 +1157,15 @@ Overfull \hbox (10.9664pt too wide) in paragraph at lines 1227--1228
 [][] 
  []
 
-
-
 [29
 
-]
-
-[30]
-
-[31]
-
-[32]
+] [30] [31] [32]
 File: rf1.png Graphic file (type bmp)
 <rf1.png>
 
 Overfull \hbox (10.93944pt too wide) in paragraph at lines 1405--1406
 [] 
  []
-
-
 
 [33]
 File: rf2.png Graphic file (type bmp)
@@ -1241,8 +1175,6 @@ Overfull \hbox (10.93944pt too wide) in paragraph at lines 1409--1410
 [] 
  []
 
-
-
 [34]
 File: rf3.png Graphic file (type bmp)
 <rf3.png>
@@ -1250,8 +1182,6 @@ File: rf3.png Graphic file (type bmp)
 Overfull \hbox (10.93944pt too wide) in paragraph at lines 1413--1414
 [] 
  []
-
-
 
 [35]
 File: rf4.png Graphic file (type bmp)
@@ -1261,8 +1191,6 @@ Overfull \hbox (10.93944pt too wide) in paragraph at lines 1417--1418
 [] 
  []
 
-
-
 [36]
 File: rf5.png Graphic file (type bmp)
 <rf5.png>
@@ -1271,8 +1199,6 @@ Overfull \hbox (10.93944pt too wide) in paragraph at lines 1422--1423
 [] 
  []
 
-
-
 [37]
 File: rf6.png Graphic file (type bmp)
 <rf6.png>
@@ -1280,8 +1206,6 @@ File: rf6.png Graphic file (type bmp)
 Overfull \hbox (10.93944pt too wide) in paragraph at lines 1429--1430
 [][] 
  []
-
-
 
 [38]
 File: rf7.png Graphic file (type bmp)
@@ -1298,8 +1222,6 @@ Overfull \hbox (10.93944pt too wide) in paragraph at lines 1437--1438
 [][] 
  []
 
-
-
 [39]
 File: rf9.png Graphic file (type bmp)
 <rf9.png>
@@ -1314,8 +1236,6 @@ File: rf10.png Graphic file (type bmp)
 Overfull \hbox (10.93944pt too wide) in paragraph at lines 1445--1446
 [][] 
  []
-
-
 
 [40]
 File: rf11.png Graphic file (type bmp)
@@ -1332,8 +1252,6 @@ Overfull \hbox (10.93944pt too wide) in paragraph at lines 1453--1454
 [][] 
  []
 
-
-
 [41]
 File: rf13.png Graphic file (type bmp)
 <rf13.png>
@@ -1342,13 +1260,199 @@ Overfull \hbox (10.93944pt too wide) in paragraph at lines 1457--1458
 [][] 
  []
 
+[42] [43] [44]
+chapter 5.
+[45
+
+]
+Overfull \hbox (329.32103pt too wide) in paragraph at lines 1652--1652
+[] \TU/lmtt/m/n/10.95 randomForest(formula = as.formula(paste(response, "~", paste(predictors,      collapse = "+"))), data = train_data, importance = TRUE)[] 
+ []
+
+[46]
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]        \TU/lmtt/m/n/10.95 1         2         3         4         5         6         7         8[] 
+ []
 
 
-[42]
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie[] 
+ []
 
-[43]
 
-[44]
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]        \TU/lmtt/m/n/10.95 9        10        11        12        13        14        15        16[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 17        18        19        20        21        22        23        24[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 25        26        27        28        29        30        31        32[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Adelie Chinstrap    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 33        34        35        36        37        38        39        40[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie    Adelie[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 41        42        43        44        45        46        47        48[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Adelie    Adelie    Adelie    Adelie    Gentoo    Gentoo    Gentoo    Gentoo[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 49        50        51        52        53        54        55        56[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 57        58        59        60        61        62        63        64[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 65        66        67        68        69        70        71        72[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 73        74        75        76        77        78        79        80[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]   \TU/lmtt/m/n/10.95 Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo    Gentoo[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 81        82        83        84        85        86        87        88[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]\TU/lmtt/m/n/10.95 Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]       \TU/lmtt/m/n/10.95 89        90        91        92        93        94        95        96[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 1689--1689
+[]\TU/lmtt/m/n/10.95 Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap Chinstrap[] 
+ []
+
+[47] [48] [49] [50] [51] [52]
+File: ch5_files/figure-pdf/unnamed-chunk-9-1.pdf Graphic file (type pdf)
+<use ch5_files/figure-pdf/unnamed-chunk-9-1.pdf>
+[53]
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[]   \TU/lmtt/m/n/10.95 species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[]   \TU/lmtt/m/n/10.95 <fct>   <fct>              <dbl>         <dbl>             <int>       <int>[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 1 Adelie  Torgersen           39.1          18.7               181        3750[] 
+ []
+
+[54]
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 2 Adelie  Torgersen           39.5          17.4               186        3800[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 3 Adelie  Torgersen           39.3          20.6               190        3650[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 4 Adelie  Torgersen           36.6          17.8               185        3700[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 5 Adelie  Biscoe              37.7          18.7               180        3600[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 6 Adelie  Biscoe              35.9          19.2               189        3800[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 7 Adelie  Biscoe              38.2          18.1               185        3950[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 8 Adelie  Biscoe              38.8          17.2               180        3800[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[] \TU/lmtt/m/n/10.95 9 Adelie  Biscoe              37.9          18.6               172        3150[] 
+ []
+
+
+Overfull \hbox (7.39111pt too wide) in paragraph at lines 2028--2028
+[]\TU/lmtt/m/n/10.95 10 Adelie  Dream               39.5          17.8               188        3300[] 
+ []
+
+[55]
 
 ! LaTeX Error: Something's wrong--perhaps a missing \item.
 
@@ -1356,18 +1460,18 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.1563 \end{CSLReferences}
+l.2039 \end{CSLReferences}
                           
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
  
 Here is how much of TeX's memory you used:
- 24443 strings out of 470404
- 476960 string characters out of 5484672
- 1182592 words of memory out of 5000000
- 52513 multiletter control sequences out of 15000+600000
+ 24476 strings out of 470195
+ 477606 string characters out of 5477276
+ 1195265 words of memory out of 5000000
+ 52752 multiletter control sequences out of 15000+600000
  634168 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 108i,8n,114p,11208b,575s stack positions out of 10000i,1000n,20000p,200000b,200000s
-Output written on index.pdf (44 pages).
+ 108i,8n,114p,11208b,706s stack positions out of 10000i,1000n,20000p,200000b,200000s
+Output written on index.pdf (55 pages).

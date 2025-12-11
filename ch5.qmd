@@ -1,0 +1,230 @@
+# Measures of Performance
+
+Task: Build a tree-based model to predict species
+
+## Load libraries
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+library(palmerpenguins)
+library(rsample)       # for initial_split
+library(dplyr)
+library(caret)
+library(randomForest)
+library(ada)
+library(gbm)
+library(tidyverse)
+library(yardstick) #roc_curve
+```
+
+## Clean data
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+penguins_clean <- na.omit(penguins)
+penguins_clean$species <- as.factor(penguins_clean$species)
+```
+
+
+## Stratified train-test split
+
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+set.seed(123)
+split <- initial_split(penguins_clean, prop = 0.7, strata = "species")
+train_data <- training(split)
+table(train_data$species)
+test_data  <- testing(split)
+table(test_data$species)
+```
+
+## Variables
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+predictors <- c("bill_length_mm", "bill_depth_mm", "flipper_length_mm", "body_mass_g", "sex")
+response <- "species"
+
+```
+
+## Random Forest Model
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+set.seed(123)
+rf_model <- randomForest(
+  as.formula(paste(response, "~", paste(predictors, collapse = "+"))),
+  data = train_data,
+  importance = TRUE
+)
+rf_model
+rf_pred <- predict(rf_model, newdata = test_data)
+rf_pred 
+rf_cm <- confusionMatrix(rf_pred, test_data$species)
+print(rf_cm)
+```
+
+## Exercise
+
+Compute the following measures manually and interpret them.
+
+1. Sensitivity
+
+2. Specificity
+
+3. Prevalence
+
+4. Positive Prediction Value (PPV)
+
+5. Negative Prediction Value (NPV)
+
+6. Detection rate
+
+7. Detection prevalence
+
+8. Balanced accuracy
+
+9. Precision
+
+10. Recall
+
+11. F1 score
+
+## Receiver Operating Characteristic (ROC) curves
+
+ROC curves are normally for binary classification, but penguins$species has three classes. For multiclass ROC, we compute one-vs-all ROC curves.
+
+It’s a plot of:
+
+- True Positive Rate (TPR / Sensitivity) on the y-axis
+
+- False Positive Rate (FPR = 1 - Specificity) on the x-axis
+
+- It shows the trade-off between sensitivity and specificity for different decision thresholds of a classifier.
+
+
+### Metric	Formula
+
+True Positive Rate (Sensitivity)	
+
+$$TPR = TP / (TP + FN)$$
+
+False Positive Rate	
+
+$$FPR = FP / (FP + TN)$$
+
+Specificity	
+
+$$TN / (TN + FP) = 1 − FPR$$
+
+Where:
+
+$TP$ = True Positives
+
+$FP$ = False Positives
+
+$TN$ = True Negatives
+
+$FN$ = False Negatives
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+# Predict class probabilities
+rf_prob <- predict(rf_model, newdata = test_data, type = "prob")
+rf_prob
+```
+
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+# Combine predicted probabilities with true labels for tidymodels
+rf_results <- test_data %>%
+  select(species) %>%
+  bind_cols(as.data.frame(rf_prob))
+rf_results
+```
+
+
+
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+# Compute ROC curves
+# roc_curve() for multiclass expects:
+# truth column and all class probability columns
+roc_data <- rf_results %>%
+  roc_curve(truth = species, Adelie, Chinstrap, Gentoo) 
+roc_data
+```
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+# Plot ROC curves
+roc_data |> autoplot()  
+```
+
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+# Compute AUC for each class
+auc_data <- rf_results |>
+  roc_auc(truth = species, Adelie, Chinstrap, Gentoo)
+auc_data
+```
+
+## Illustration of How ROC Curves Are Plotted
+
+Let’s do that for one species (Adelie) vs others, using predicted probabilities from a Random Forest. 
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+test_data_adelie <- test_data |>
+  mutate(actual = ifelse(species == "Adelie", 1, 0))
+test_data_adelie |> glimpse()
+```
+
+We can calculate TPR and FPR at different thresholds:
+
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+thresholds <- seq(0, 1, by = 0.1)  # thresholds from 0 to 1
+roc_manual <- data.frame(threshold = thresholds, TPR = NA, FPR = NA)
+
+for (i in seq_along(thresholds)) {
+  thresh <- thresholds[i]
+  
+  # Predicted class based on threshold
+  pred_class <- ifelse(test_data$pred_adelie >= thresh, 1, 0)
+  
+  # Confusion matrix components
+  TP <- sum(pred_class == 1 & test_data$actual == 1)
+  FP <- sum(pred_class == 1 & test_data$actual == 0)
+  FN <- sum(pred_class == 0 & test_data$actual == 1)
+  TN <- sum(pred_class == 0 & test_data$actual == 0)
+  
+  # Compute TPR and FPR
+  roc_manual$TPR[i] <- TP / (TP + FN)
+  roc_manual$FPR[i] <- FP / (FP + TN)
+}
+
+roc_manual
+
+```
+
+The NaN (Not a Number) appears because some thresholds may produce divisions by zero, typically when (TP + FN) or (FP + TN) is zero. This can happen if the classifier predicts all 0s or all 1s for extreme thresholds (0 or 1).
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+thresholds <- seq(0, 1, by = 0.1)  # thresholds from 0 to 1
+roc_manual <- data.frame(threshold = thresholds, TPR = NA, FPR = NA)
+
+for (i in seq_along(thresholds)) {
+  thresh <- thresholds[i]
+  
+  # Predicted class based on threshold
+  pred_class <- ifelse(test_data$pred_adelie >= thresh, 1, 0)
+  
+  # Confusion matrix components
+  TP <- sum(pred_class == 1 & test_data$actual == 1)
+  FP <- sum(pred_class == 1 & test_data$actual == 0)
+  FN <- sum(pred_class == 0 & test_data$actual == 1)
+  TN <- sum(pred_class == 0 & test_data$actual == 0)
+  
+  # Compute TPR safely
+  roc_manual$TPR[i] <- if ((TP + FN) == 0) 0 else TP / (TP + FN)
+  roc_manual$FPR[i] <- if ((FP + TN) == 0) 0 else FP / (FP + TN)
+}
+
+print(roc_manual)
+
+
+```

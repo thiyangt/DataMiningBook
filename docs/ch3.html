@@ -201,6 +201,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Measures of Performance</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -677,12 +683,12 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
     cp = 0.02, maxdepth = 3))
   n= 32 
 
-          CP nsplit rel error    xerror      xstd
-1 0.65266121      0 1.0000000 1.0394094 0.2471302
-2 0.19470235      1 0.3473388 0.7835183 0.1672961
-3 0.03618342      2 0.1526364 0.4803112 0.1251639
-4 0.02324972      3 0.1164530 0.4742270 0.1301623
-5 0.02000000      4 0.0932033 0.4534145 0.1292722
+          CP nsplit rel error    xerror       xstd
+1 0.65266121      0 1.0000000 1.1062889 0.25524464
+2 0.19470235      1 0.3473388 0.7004568 0.17080337
+3 0.03618342      2 0.1526364 0.4083779 0.11430724
+4 0.02324972      3 0.1164530 0.3096135 0.08234786
+5 0.02000000      4 0.0932033 0.2739404 0.07862384
 
 Variable importance
   wt disp   hp drat  cyl qsec   vs 
@@ -787,9 +793,9 @@ Root node error: 1126/32 = 35.189
 n= 32 
 
         CP nsplit rel error  xerror    xstd
-1 0.643125      0   1.00000 1.04204 0.24703
-2 0.097484      1   0.35687 0.60348 0.16402
-3 0.000100      2   0.25939 0.47353 0.10614</code></pre>
+1 0.643125      0   1.00000 1.04303 0.24648
+2 0.097484      1   0.35687 0.64420 0.16267
+3 0.000100      2   0.25939 0.56491 0.12017</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Plot cross-validation results</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotcp</span>(full_tree, <span class="at">main =</span> <span class="st">"Cost-Complexity Pruning Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -823,9 +829,9 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror      xstd
-1 0.64312523      0 1.0000000 1.0420380 0.2470261
-2 0.09748407      1 0.3568748 0.6034829 0.1640170
-3 0.00010000      2 0.2593907 0.4735272 0.1061364
+1 0.64312523      0 1.0000000 1.0430314 0.2464844
+2 0.09748407      1 0.3568748 0.6441982 0.1626653
+3 0.00010000      2 0.2593907 0.5649136 0.1201705
 
 Variable importance
  cyl disp   hp   wt qsec   vs carb 
