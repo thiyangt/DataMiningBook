@@ -1,0 +1,3 @@
+# Support Vector Machine
+
+<!--https://stats.stackexchange.com/questions/510052/are-neural-networks-better-than-svms-->

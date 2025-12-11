@@ -178,5 +178,25 @@
     "crumbs": [
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>k-fold Cross Validation Approaches</span>"
     ]
+  },
+  {
+    "objectID": "ch7.html",
+    "href": "ch7.html",
+    "title": "7  Extreme Gradient Boosting (XGBoost)",
+    "section": "",
+    "text": "7.1 Without cross validation\nExtreme Gradient Boosting (XGBoost) is a machine learning algorithm that uses gradient boosted decision trees. It is part of a new generation of algorithms that are designed to be highly accurate.\nXGBoost improves accuracy mainly by reducing overfitting during training. This is achieved through its objective function, which has two parts:\nBy combining these, XGBoost builds a model that is both accurate and generalizes well to new data.\n# Install packages if not already installed\n# install.packages(\"xgboost\")\n# install.packages(\"caret\")\n# install.packages(\"Matrix\")\n\nlibrary(xgboost)\nlibrary(caret)\nlibrary(Matrix)\n\n# Example dataset: Iris (binary classification: setosa vs others)\ndata(iris)\niris$label &lt;- ifelse(iris$Species == \"setosa\", 1, 0)  # binary label\niris$Species &lt;- NULL  # remove original factor\n\n# Split data into training and test sets\nset.seed(123)\ntrain_index &lt;- createDataPartition(iris$label, p = 0.8, list = FALSE)\ntrain_data &lt;- iris[train_index, ]\ntest_data &lt;- iris[-train_index, ]\n\n# Convert data to matrix form\ntrain_matrix &lt;- as.matrix(train_data[, -ncol(train_data)])\ntrain_label &lt;- train_data$label\ntest_matrix &lt;- as.matrix(test_data[, -ncol(test_data)])\ntest_label &lt;- test_data$label\n\n# Create DMatrix objects (XGBoost format)\ndtrain &lt;- xgb.DMatrix(data = train_matrix, label = train_label)\ndtest &lt;- xgb.DMatrix(data = test_matrix, label = test_label)\n\n# Set parameters\nparams &lt;- list(\n  booster = \"gbtree\",\n  objective = \"binary:logistic\",\n  eval_metric = \"logloss\",  # or \"error\"\n  eta = 0.1,  # learning rate\n  max_depth = 3,\n  min_child_weight = 1,\n  subsample = 0.8,\n  colsample_bytree = 0.8\n)\n\n# Train the model\nset.seed(123)\nxgb_model &lt;- xgb.train(\n  params = params,\n  data = dtrain,\n  nrounds = 100,\n  watchlist = list(train = dtrain, test = dtest),\n  early_stopping_rounds = 10,\n  print_every_n = 10\n)\n\nMultiple eval metrics are present. Will use test_logloss for early stopping.\nWill train until test_logloss hasn't improved in 10 rounds.\n\n[1] train-logloss:0.552090  test-logloss:0.552090 \n[11]    train-logloss:0.179963  test-logloss:0.179392 \n[21]    train-logloss:0.074191  test-logloss:0.073715 \n[31]    train-logloss:0.036053  test-logloss:0.035705 \n[41]    train-logloss:0.021509  test-logloss:0.021298 \n[51]    train-logloss:0.019402  test-logloss:0.019212 \nStopping. Best iteration:\n[56]    train-logloss:0.019402  test-logloss:0.019212\n\n[56]    train-logloss:0.019402  test-logloss:0.019212 \n\n# Make predictions\npred_prob &lt;- predict(xgb_model, dtest)\npred_label &lt;- ifelse(pred_prob &gt; 0.5, 1, 0)\n\n# Evaluate\nconfusionMatrix(factor(pred_label), factor(test_label))\n\nConfusion Matrix and Statistics\n\n          Reference\nPrediction  0  1\n         0 20  0\n         1  0 10\n                                     \n               Accuracy : 1          \n                 95% CI : (0.8843, 1)\n    No Information Rate : 0.6667     \n    P-Value [Acc &gt; NIR] : 5.215e-06  \n                                     \n                  Kappa : 1          \n                                     \n Mcnemar's Test P-Value : NA         \n                                     \n            Sensitivity : 1.0000     \n            Specificity : 1.0000     \n         Pos Pred Value : 1.0000     \n         Neg Pred Value : 1.0000     \n             Prevalence : 0.6667     \n         Detection Rate : 0.6667     \n   Detection Prevalence : 0.6667     \n      Balanced Accuracy : 1.0000     \n                                     \n       'Positive' Class : 0",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Extreme Gradient Boosting (XGBoost)</span>"
+    ]
+  },
+  {
+    "objectID": "ch7.html#with-cross-validation",
+    "href": "ch7.html#with-cross-validation",
+    "title": "7  Extreme Gradient Boosting (XGBoost)",
+    "section": "7.2 With cross validation",
+    "text": "7.2 With cross validation",
+    "crumbs": [
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Extreme Gradient Boosting (XGBoost)</span>"
+    ]
   }
 ]

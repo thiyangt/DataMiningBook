@@ -9,3 +9,72 @@ XGBoost improves accuracy mainly by reducing overfitting during training. This i
 2. Regularization – controls the complexity of the model, helping to prevent overfitting.
 
 By combining these, XGBoost builds a model that is both accurate and generalizes well to new data.
+
+## Without cross validation
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+# Install packages if not already installed
+# install.packages("xgboost")
+# install.packages("caret")
+# install.packages("Matrix")
+
+library(xgboost)
+library(caret)
+library(Matrix)
+
+# Example dataset: Iris (binary classification: setosa vs others)
+data(iris)
+iris$label <- ifelse(iris$Species == "setosa", 1, 0)  # binary label
+iris$Species <- NULL  # remove original factor
+
+# Split data into training and test sets
+set.seed(123)
+train_index <- createDataPartition(iris$label, p = 0.8, list = FALSE)
+train_data <- iris[train_index, ]
+test_data <- iris[-train_index, ]
+
+# Convert data to matrix form
+train_matrix <- as.matrix(train_data[, -ncol(train_data)])
+train_label <- train_data$label
+test_matrix <- as.matrix(test_data[, -ncol(test_data)])
+test_label <- test_data$label
+
+# Create DMatrix objects (XGBoost format)
+dtrain <- xgb.DMatrix(data = train_matrix, label = train_label)
+dtest <- xgb.DMatrix(data = test_matrix, label = test_label)
+
+# Set parameters
+params <- list(
+  booster = "gbtree",
+  objective = "binary:logistic",
+  eval_metric = "logloss",  # or "error"
+  eta = 0.1,  # learning rate
+  max_depth = 3,
+  min_child_weight = 1,
+  subsample = 0.8,
+  colsample_bytree = 0.8
+)
+
+# Train the model
+set.seed(123)
+xgb_model <- xgb.train(
+  params = params,
+  data = dtrain,
+  nrounds = 100,
+  watchlist = list(train = dtrain, test = dtest),
+  early_stopping_rounds = 10,
+  print_every_n = 10
+)
+
+# Make predictions
+pred_prob <- predict(xgb_model, dtest)
+pred_label <- ifelse(pred_prob > 0.5, 1, 0)
+
+# Evaluate
+confusionMatrix(factor(pred_label), factor(test_label))
+
+```
+
+## With cross validation
+ 
+ 
