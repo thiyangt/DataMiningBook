@@ -207,6 +207,30 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./ch6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">k-fold Cross Validation Approaches</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Extreme Gradient Boosting (XGBoost)</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Exercise: MCQ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ch9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Support Vector Machine</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -684,11 +708,11 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror       xstd
-1 0.65266121      0 1.0000000 1.1062889 0.25524464
-2 0.19470235      1 0.3473388 0.7004568 0.17080337
-3 0.03618342      2 0.1526364 0.4083779 0.11430724
-4 0.02324972      3 0.1164530 0.3096135 0.08234786
-5 0.02000000      4 0.0932033 0.2739404 0.07862384
+1 0.65266121      0 1.0000000 1.0627414 0.25139263
+2 0.19470235      1 0.3473388 0.6279893 0.16030038
+3 0.03618342      2 0.1526364 0.3964079 0.09870545
+4 0.02324972      3 0.1164530 0.3802026 0.09803212
+5 0.02000000      4 0.0932033 0.3851732 0.09711157
 
 Variable importance
   wt disp   hp drat  cyl qsec   vs 
@@ -793,9 +817,9 @@ Root node error: 1126/32 = 35.189
 n= 32 
 
         CP nsplit rel error  xerror    xstd
-1 0.643125      0   1.00000 1.04303 0.24648
-2 0.097484      1   0.35687 0.64420 0.16267
-3 0.000100      2   0.25939 0.56491 0.12017</code></pre>
+1 0.643125      0   1.00000 1.05784 0.25304
+2 0.097484      1   0.35687 0.55432 0.16660
+3 0.000100      2   0.25939 0.45337 0.10827</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Plot cross-validation results</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotcp</span>(full_tree, <span class="at">main =</span> <span class="st">"Cost-Complexity Pruning Plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -829,9 +853,9 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror      xstd
-1 0.64312523      0 1.0000000 1.0430314 0.2464844
-2 0.09748407      1 0.3568748 0.6441982 0.1626653
-3 0.00010000      2 0.2593907 0.5649136 0.1201705
+1 0.64312523      0 1.0000000 1.0578364 0.2530370
+2 0.09748407      1 0.3568748 0.5543173 0.1666048
+3 0.00010000      2 0.2593907 0.4533734 0.1082721
 
 Variable importance
  cyl disp   hp   wt qsec   vs carb 

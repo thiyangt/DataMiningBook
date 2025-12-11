@@ -817,11 +817,11 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror       xstd
-1 0.65266121      0 1.0000000 1.0455431 0.24712804
-2 0.19470235      1 0.3473388 0.6372794 0.17067743
-3 0.03618342      2 0.1526364 0.3850991 0.09727425
-4 0.02324972      3 0.1164530 0.3849136 0.10418658
-5 0.02000000      4 0.0932033 0.3470311 0.10385935
+1 0.65266121      0 1.0000000 1.0425061 0.24509628
+2 0.19470235      1 0.3473388 0.6949278 0.17914734
+3 0.03618342      2 0.1526364 0.4175280 0.13271107
+4 0.02324972      3 0.1164530 0.3642353 0.09059916
+5 0.02000000      4 0.0932033 0.3524581 0.09534185
 
 Variable importance
   wt disp   hp drat  cyl qsec   vs 
@@ -932,9 +932,9 @@ Root node error: 1126/32 = 35.189
 n= 32 
 
         CP nsplit rel error  xerror    xstd
-1 0.643125      0   1.00000 1.09687 0.26357
-2 0.097484      1   0.35687 0.83062 0.18855
-3 0.000100      2   0.25939 0.63665 0.14784
+1 0.643125      0   1.00000 1.03831 0.24176
+2 0.097484      1   0.35687 0.65057 0.16830
+3 0.000100      2   0.25939 0.56072 0.11192
 \end{verbatim}
 
 \begin{Shaded}
@@ -974,9 +974,9 @@ rpart(formula = mpg ~ ., data = mtcars, method = "anova", control = rpart.contro
   n= 32 
 
           CP nsplit rel error    xerror      xstd
-1 0.64312523      0 1.0000000 1.0968692 0.2635747
-2 0.09748407      1 0.3568748 0.8306178 0.1885469
-3 0.00010000      2 0.2593907 0.6366477 0.1478392
+1 0.64312523      0 1.0000000 1.0383066 0.2417574
+2 0.09748407      1 0.3568748 0.6505675 0.1683026
+3 0.00010000      2 0.2593907 0.5607231 0.1119227
 
 Variable importance
  cyl disp   hp   wt qsec   vs carb 
@@ -2004,28 +2004,1343 @@ probabilities from a Random Forest.
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{test\_data\_adelie }\OtherTok{\textless{}{-}}\NormalTok{ test\_data }\SpecialCharTok{|\textgreater{}}
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{actual =} \FunctionTok{ifelse}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Adélie"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
-\NormalTok{test\_data\_adelie}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{actual =} \FunctionTok{ifelse}\NormalTok{(species }\SpecialCharTok{==} \StringTok{"Adelie"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{))}
+\NormalTok{test\_data\_adelie }\SpecialCharTok{|\textgreater{}} \FunctionTok{glimpse}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-# A tibble: 101 x 9
-   species island    bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
-   <fct>   <fct>              <dbl>         <dbl>             <int>       <int>
- 1 Adelie  Torgersen           39.1          18.7               181        3750
- 2 Adelie  Torgersen           39.5          17.4               186        3800
- 3 Adelie  Torgersen           39.3          20.6               190        3650
- 4 Adelie  Torgersen           36.6          17.8               185        3700
- 5 Adelie  Biscoe              37.7          18.7               180        3600
- 6 Adelie  Biscoe              35.9          19.2               189        3800
- 7 Adelie  Biscoe              38.2          18.1               185        3950
- 8 Adelie  Biscoe              38.8          17.2               180        3800
- 9 Adelie  Biscoe              37.9          18.6               172        3150
-10 Adelie  Dream               39.5          17.8               188        3300
-# i 91 more rows
-# i 3 more variables: sex <fct>, year <int>, actual <dbl>
+Rows: 101
+Columns: 9
+$ species           <fct> Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Adel~
+$ island            <fct> Torgersen, Torgersen, Torgersen, Torgersen, Biscoe, ~
+$ bill_length_mm    <dbl> 39.1, 39.5, 39.3, 36.6, 37.7, 35.9, 38.2, 38.8, 37.9~
+$ bill_depth_mm     <dbl> 18.7, 17.4, 20.6, 17.8, 18.7, 19.2, 18.1, 17.2, 18.6~
+$ flipper_length_mm <int> 181, 186, 190, 185, 180, 189, 185, 180, 172, 188, 18~
+$ body_mass_g       <int> 3750, 3800, 3650, 3700, 3600, 3800, 3950, 3800, 3150~
+$ sex               <fct> male, female, male, female, male, female, male, male~
+$ year              <int> 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007~
+$ actual            <dbl> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1~
 \end{verbatim}
+
+We can calculate TPR and FPR at different thresholds:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{thresholds }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{)  }\CommentTok{\# thresholds from 0 to 1}
+\NormalTok{roc\_manual }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{threshold =}\NormalTok{ thresholds, }\AttributeTok{TPR =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{FPR =} \ConstantTok{NA}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(thresholds)) \{}
+\NormalTok{  thresh }\OtherTok{\textless{}{-}}\NormalTok{ thresholds[i]}
+  
+  \CommentTok{\# Predicted class based on threshold}
+\NormalTok{  pred\_class }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(test\_data}\SpecialCharTok{$}\NormalTok{pred\_adelie }\SpecialCharTok{\textgreater{}=}\NormalTok{ thresh, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+  
+  \CommentTok{\# Confusion matrix components}
+\NormalTok{  TP }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pred\_class }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{actual }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)}
+\NormalTok{  FP }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pred\_class }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{actual }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+\NormalTok{  FN }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pred\_class }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{actual }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)}
+\NormalTok{  TN }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pred\_class }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{actual }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+  
+  \CommentTok{\# Compute TPR and FPR}
+\NormalTok{  roc\_manual}\SpecialCharTok{$}\NormalTok{TPR[i] }\OtherTok{\textless{}{-}}\NormalTok{ TP }\SpecialCharTok{/}\NormalTok{ (TP }\SpecialCharTok{+}\NormalTok{ FN)}
+\NormalTok{  roc\_manual}\SpecialCharTok{$}\NormalTok{FPR[i] }\OtherTok{\textless{}{-}}\NormalTok{ FP }\SpecialCharTok{/}\NormalTok{ (FP }\SpecialCharTok{+}\NormalTok{ TN)}
+\NormalTok{\}}
+
+\NormalTok{roc\_manual}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   threshold TPR FPR
+1        0.0 NaN NaN
+2        0.1 NaN NaN
+3        0.2 NaN NaN
+4        0.3 NaN NaN
+5        0.4 NaN NaN
+6        0.5 NaN NaN
+7        0.6 NaN NaN
+8        0.7 NaN NaN
+9        0.8 NaN NaN
+10       0.9 NaN NaN
+11       1.0 NaN NaN
+\end{verbatim}
+
+The NaN (Not a Number) appears because some thresholds may produce
+divisions by zero, typically when (TP + FN) or (FP + TN) is zero. This
+can happen if the classifier predicts all 0s or all 1s for extreme
+thresholds (0 or 1).
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{thresholds }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\AttributeTok{by =} \FloatTok{0.1}\NormalTok{)  }\CommentTok{\# thresholds from 0 to 1}
+\NormalTok{roc\_manual }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{threshold =}\NormalTok{ thresholds, }\AttributeTok{TPR =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{FPR =} \ConstantTok{NA}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(thresholds)) \{}
+\NormalTok{  thresh }\OtherTok{\textless{}{-}}\NormalTok{ thresholds[i]}
+  
+  \CommentTok{\# Predicted class based on threshold}
+\NormalTok{  pred\_class }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(test\_data}\SpecialCharTok{$}\NormalTok{pred\_adelie }\SpecialCharTok{\textgreater{}=}\NormalTok{ thresh, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+  
+  \CommentTok{\# Confusion matrix components}
+\NormalTok{  TP }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pred\_class }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{actual }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)}
+\NormalTok{  FP }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pred\_class }\SpecialCharTok{==} \DecValTok{1} \SpecialCharTok{\&}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{actual }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+\NormalTok{  FN }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pred\_class }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{actual }\SpecialCharTok{==} \DecValTok{1}\NormalTok{)}
+\NormalTok{  TN }\OtherTok{\textless{}{-}} \FunctionTok{sum}\NormalTok{(pred\_class }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{\&}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{actual }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+  
+  \CommentTok{\# Compute TPR safely}
+\NormalTok{  roc\_manual}\SpecialCharTok{$}\NormalTok{TPR[i] }\OtherTok{\textless{}{-}} \ControlFlowTok{if}\NormalTok{ ((TP }\SpecialCharTok{+}\NormalTok{ FN) }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) }\DecValTok{0} \ControlFlowTok{else}\NormalTok{ TP }\SpecialCharTok{/}\NormalTok{ (TP }\SpecialCharTok{+}\NormalTok{ FN)}
+\NormalTok{  roc\_manual}\SpecialCharTok{$}\NormalTok{FPR[i] }\OtherTok{\textless{}{-}} \ControlFlowTok{if}\NormalTok{ ((FP }\SpecialCharTok{+}\NormalTok{ TN) }\SpecialCharTok{==} \DecValTok{0}\NormalTok{) }\DecValTok{0} \ControlFlowTok{else}\NormalTok{ FP }\SpecialCharTok{/}\NormalTok{ (FP }\SpecialCharTok{+}\NormalTok{ TN)}
+\NormalTok{\}}
+
+\FunctionTok{print}\NormalTok{(roc\_manual)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+   threshold TPR FPR
+1        0.0   0   0
+2        0.1   0   0
+3        0.2   0   0
+4        0.3   0   0
+5        0.4   0   0
+6        0.5   0   0
+7        0.6   0   0
+8        0.7   0   0
+9        0.8   0   0
+10       0.9   0   0
+11       1.0   0   0
+\end{verbatim}
+
+\section{Variable Importance
+Measures}\label{variable-importance-measures}
+
+Random Forest provides two widely used importance metrics:
+
+\textbf{(a) Mean Decrease in Gini (Gini Importance)}
+
+\begin{verbatim}
+Measures how much a variable reduces node impurity (Gini index) across all trees.
+
+Variables used for highly discriminative splits receive larger importance values.
+
+Higher value → more important predictor.
+\end{verbatim}
+
+\textbf{(b) Mean Decrease in Accuracy (Permutation Importance)}
+
+\begin{verbatim}
+After the model is trained, the values of a variable are randomly permuted.
+
+If the model accuracy drops significantly, the variable is important.
+
+Reflects the predictive power of each variable.
+\end{verbatim}
+
+Interpretation:
+
+Shows which features the random forest relied on most.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{importance}\NormalTok{(rf\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+                     Adelie Chinstrap    Gentoo MeanDecreaseAccuracy
+bill_length_mm    95.948710 63.227999 14.989892             85.86134
+bill_depth_mm     20.855953 17.906902 30.126735             35.12314
+flipper_length_mm 18.476543 28.099211 28.799293             34.80012
+body_mass_g        9.477884 19.466334 15.807238             21.34092
+sex                7.976165  8.382336  6.158169             11.40692
+                  MeanDecreaseGini
+bill_length_mm            57.18023
+bill_depth_mm             28.01945
+flipper_length_mm         44.80369
+body_mass_g               15.60508
+sex                        1.49749
+\end{verbatim}
+
+\textbf{1. Mean Decrease in Accuracy (Permutation Importance)}
+
+This measures how much the model's accuracy drops when the values of
+each variable are randomly permuted. Higher values → more important.
+
+Interpretation:
+
+bill\_length\_mm (85.86) is by far the most important variable.
+
+→ Shuffling this variable causes a large drop in accuracy.
+
+→ Species are strongly separated by bill length.
+
+bill\_depth\_mm (35.12) and flipper\_length\_mm (34.80)
+
+→ Moderately important.
+
+→ They help the model differentiate species, but less than bill length.
+
+body\_mass\_g (21.34)
+
+→ Some importance.
+
+→ Body mass varies between species but overlaps, so it is less
+discriminative.
+
+sex (11.41)
+
+→ Least important.
+
+→ Sex does not significantly differentiate species
+
+\textbf{2. Mean Decrease in Gini (Impurity Importance)}
+
+This measures how much each variable reduces node impurity in the
+decision trees. Higher values → variable used for strong, clean splits.
+
+Interpretation:
+
+bill\_length\_mm (57.18)
+
+→ Most useful for creating pure nodes.
+
+→ Confirms it is the single best predictor of species.
+
+flipper\_length\_mm (44.80)
+
+→ Also very important for clean splits.
+
+bill\_depth\_mm (28.02)
+
+→ Useful but less than the above.
+
+body\_mass\_g (15.61)
+
+→ Small contribution.
+
+sex (1.50)
+
+→ Barely contributes to splitting.
+
+→ Almost irrelevant for species classification.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{varImpPlot}\NormalTok{(rf\_model,}
+           \AttributeTok{main =} \StringTok{"Random Forest Variable Importance"}\NormalTok{,}
+           \AttributeTok{pch =} \DecValTok{16}\NormalTok{,}
+           \AttributeTok{col =} \StringTok{"blue"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ch5_files/figure-pdf/unnamed-chunk-15-1.pdf}}
+
+\section{ggplot2 Variable Importance Plot (Gini
+Importance)}\label{ggplot2-variable-importance-plot-gini-importance}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\NormalTok{imp }\OtherTok{\textless{}{-}} \FunctionTok{importance}\NormalTok{(rf\_model)}
+\NormalTok{imp\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{variable =} \FunctionTok{rownames}\NormalTok{(imp),}
+  \AttributeTok{MeanDecreaseGini =}\NormalTok{ imp[, }\StringTok{"MeanDecreaseGini"}\NormalTok{]}
+\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(imp\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(variable, MeanDecreaseGini),}
+                   \AttributeTok{y =}\NormalTok{ MeanDecreaseGini)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \StringTok{"steelblue"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Random Forest Variable Importance (Mean Decrease Gini)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Predictor"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Importance (Gini)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ch5_files/figure-pdf/unnamed-chunk-16-1.pdf}}
+
+\section{ggplot2 Variable Importance Plot (Permutation
+Importance)}\label{ggplot2-variable-importance-plot-permutation-importance}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{imp2\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{variable =} \FunctionTok{rownames}\NormalTok{(imp),}
+  \AttributeTok{MeanDecreaseAccuracy =}\NormalTok{ imp[, }\StringTok{"MeanDecreaseAccuracy"}\NormalTok{]}
+\NormalTok{)}
+
+\FunctionTok{ggplot}\NormalTok{(imp2\_df, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{reorder}\NormalTok{(variable, MeanDecreaseAccuracy),}
+                    \AttributeTok{y =}\NormalTok{ MeanDecreaseAccuracy)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_col}\NormalTok{(}\AttributeTok{fill =} \StringTok{"darkgreen"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{coord\_flip}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Random Forest Variable Importance (Permutation Importance)"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Predictor"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Importance (Mean Decrease Accuracy)"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{(}\AttributeTok{base\_size =} \DecValTok{14}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ch5_files/figure-pdf/unnamed-chunk-17-1.pdf}}
+
+\bookmarksetup{startatroot}
+
+\chapter{k-fold Cross Validation
+Approaches}\label{k-fold-cross-validation-approaches}
+
+\section{Load Packages}\label{load-packages}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(randomForest)}
+\FunctionTok{library}\NormalTok{(pROC)}
+\FunctionTok{library}\NormalTok{(caret)}
+\FunctionTok{library}\NormalTok{(palmerpenguins)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Prepare data}\label{prepare-data}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penguins }\OtherTok{\textless{}{-}}\NormalTok{ penguins }\SpecialCharTok{|\textgreater{}} \FunctionTok{na.omit}\NormalTok{()}
+\NormalTok{penguins}\SpecialCharTok{$}\NormalTok{species }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(penguins}\SpecialCharTok{$}\NormalTok{species)}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Create k-fold cross
+validation}\label{create-k-fold-cross-validation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{folds }\OtherTok{\textless{}{-}} \FunctionTok{createFolds}\NormalTok{(penguins}\SpecialCharTok{$}\NormalTok{species, }\AttributeTok{k =} \DecValTok{5}\NormalTok{)}
+\NormalTok{folds}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+$Fold1
+ [1]   8  13  16  20  23  27  36  51  56  57  58  60  63  64  87  90  91  94  96
+[20] 106 110 112 118 124 125 130 134 138 139 151 152 154 156 166 181 182 190 200
+[39] 204 206 211 213 222 234 235 236 238 240 243 244 254 257 263 266 273 277 278
+[58] 284 291 302 309 310 312 313 317 324
+
+$Fold2
+ [1]  10  12  14  19  22  30  33  43  46  47  54  61  68  71  72  74  78  82  92
+[20]  97 102 104 107 108 111 119 120 123 132 147 149 158 160 161 169 174 178 180
+[39] 191 192 198 199 201 202 215 219 226 231 237 242 248 250 259 267 268 270 274
+[58] 280 287 300 316 319 320 322 332 333
+
+$Fold3
+ [1]   3   4   5  15  17  18  25  29  32  35  37  40  44  45  48  66  70  86  89
+[20]  93  99 105 116 122 129 131 136 140 141 144 157 165 172 177 183 184 186 187
+[39] 194 195 197 205 207 209 210 212 217 218 220 228 229 232 262 276 281 282 285
+[58] 288 289 292 293 298 304 315 323 325 329
+
+$Fold4
+ [1]   1   6   9  11  24  26  28  38  39  41  52  62  67  69  79  81  83  84  85
+[20]  88  98 100 109 115 128 135 143 145 146 153 155 159 164 167 168 175 188 193
+[39] 196 208 216 221 223 224 227 230 233 241 247 256 258 261 265 269 271 286 290
+[58] 299 301 303 305 306 307 308 311 321 331
+
+$Fold5
+ [1]   2   7  21  31  34  42  49  50  53  55  59  65  73  75  76  77  80  95 101
+[20] 103 113 114 117 121 126 127 133 137 142 148 150 162 163 170 171 173 176 179
+[39] 185 189 203 214 225 239 245 246 249 251 252 253 255 260 264 272 275 279 283
+[58] 294 295 296 297 314 318 326 327 328 330
+\end{verbatim}
+
+\section{Run random forest on each
+fold}\label{run-random-forest-on-each-fold}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{results }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{Fold =} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{,}
+  \AttributeTok{Accuracy =} \ConstantTok{NA}\NormalTok{,}
+  \AttributeTok{Sensitivity =} \ConstantTok{NA}\NormalTok{,}
+  \AttributeTok{Specificity =} \ConstantTok{NA}\NormalTok{,}
+  \AttributeTok{AUC =} \ConstantTok{NA}
+\NormalTok{)}
+
+\NormalTok{roc\_list }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{()}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{) \{}
+  
+\NormalTok{  test\_idx  }\OtherTok{\textless{}{-}}\NormalTok{ folds[[i]]}
+\NormalTok{  train\_set }\OtherTok{\textless{}{-}}\NormalTok{ penguins[}\SpecialCharTok{{-}}\NormalTok{test\_idx, ]}
+\NormalTok{  test\_set  }\OtherTok{\textless{}{-}}\NormalTok{ penguins[test\_idx, ]}
+  
+  \CommentTok{\# Fit RF}
+\NormalTok{  rf\_model }\OtherTok{\textless{}{-}} \FunctionTok{randomForest}\NormalTok{(}
+\NormalTok{    species }\SpecialCharTok{\textasciitilde{}}\NormalTok{ bill\_length\_mm }\SpecialCharTok{+}\NormalTok{ bill\_depth\_mm }\SpecialCharTok{+}
+\NormalTok{      flipper\_length\_mm }\SpecialCharTok{+}\NormalTok{ body\_mass\_g }\SpecialCharTok{+}\NormalTok{ sex,}
+    \AttributeTok{data =}\NormalTok{ train\_set,}
+    \AttributeTok{ntree =} \DecValTok{500}\NormalTok{,}
+    \AttributeTok{mtry =} \DecValTok{3}\NormalTok{,}
+    \AttributeTok{importance =} \ConstantTok{TRUE}
+\NormalTok{  )}
+  
+  \CommentTok{\# Predict class}
+\NormalTok{  pred\_class }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(rf\_model, test\_set)}
+  
+  \CommentTok{\# Predict probabilities}
+\NormalTok{  pred\_prob }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(rf\_model, test\_set, }\AttributeTok{type =} \StringTok{"prob"}\NormalTok{)}
+  
+  \CommentTok{\# Confusion matrix}
+\NormalTok{  cm }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(pred\_class, test\_set}\SpecialCharTok{$}\NormalTok{species)}
+  
+\NormalTok{  results}\SpecialCharTok{$}\NormalTok{Accuracy[i]    }\OtherTok{\textless{}{-}}\NormalTok{ cm}\SpecialCharTok{$}\NormalTok{overall[}\StringTok{"Accuracy"}\NormalTok{]}
+\NormalTok{  results}\SpecialCharTok{$}\NormalTok{Sensitivity[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(cm}\SpecialCharTok{$}\NormalTok{byClass[, }\StringTok{"Sensitivity"}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+\NormalTok{  results}\SpecialCharTok{$}\NormalTok{Specificity[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(cm}\SpecialCharTok{$}\NormalTok{byClass[, }\StringTok{"Specificity"}\NormalTok{], }\AttributeTok{na.rm =} \ConstantTok{TRUE}\NormalTok{)}
+  
+  \CommentTok{\# Hand–Till AUC for MULTICLASS}
+\NormalTok{  roc\_obj }\OtherTok{\textless{}{-}} \FunctionTok{multiclass.roc}\NormalTok{(}\AttributeTok{response =}\NormalTok{ test\_set}\SpecialCharTok{$}\NormalTok{species, }\AttributeTok{predictor =}\NormalTok{ pred\_prob)}
+\NormalTok{  results}\SpecialCharTok{$}\NormalTok{AUC[i] }\OtherTok{\textless{}{-}} \FunctionTok{auc}\NormalTok{(roc\_obj)}
+  
+\NormalTok{  roc\_list[[i]] }\OtherTok{\textless{}{-}}\NormalTok{ roc\_obj}
+\NormalTok{\}}
+
+\NormalTok{results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  Fold  Accuracy Sensitivity Specificity       AUC
+1    1 0.9545455   0.9631226   0.9794849 0.9990790
+2    2 0.9848485   0.9885057   0.9937107 0.9986737
+3    3 0.9850746   0.9888889   0.9937107 1.0000000
+4    4 0.9850746   0.9761905   0.9912281 1.0000000
+5    5 0.9701493   0.9523810   0.9824561 0.9958949
+\end{verbatim}
+
+\section{When using Random Forest with Cross-Validation, what is the
+final
+model?}\label{when-using-random-forest-with-cross-validation-what-is-the-final-model}
+
+During k-fold cross-validation, you train K different random forest
+models, each on a different subset of the data.
+
+But none of those K models is your final model.
+
+The purpose of Cross Validation in Random Forest
+
+✔️ Evaluate multiple hyperparameter combinations
+
+For example:
+
+mtry (number of variables randomly chosen at each split)
+
+ntree (number of trees)
+
+nodesize
+
+maxnodes
+
+✔️ Measure model performance for each hyperparameter set
+
+Using:
+
+Accuracy
+
+AUC
+
+Sensitivity / Specificity
+
+Kappa
+
+Log-loss (if needed)
+
+✔️ Choose the best-performing hyperparameter combination
+
+(Usually the one giving highest CV accuracy or AUC.)
+
+🎯 Then what?
+
+After identifying the best hyperparameters
+
+👉 You retrain one final random forest model on the entire dataset using
+ONLY the best hyperparameters.
+
+\section{Example}\label{example-2}
+
+\subsection{Hyperparameter Grid}\label{hyperparameter-grid}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{grid }\OtherTok{\textless{}{-}} \FunctionTok{expand.grid}\NormalTok{(}
+  \AttributeTok{mtry  =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+  \AttributeTok{ntree =} \FunctionTok{c}\NormalTok{(}\DecValTok{300}\NormalTok{, }\DecValTok{500}\NormalTok{, }\DecValTok{800}\NormalTok{)}
+\NormalTok{)}
+\NormalTok{grid}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  mtry ntree
+1    2   300
+2    3   300
+3    4   300
+4    2   500
+5    3   500
+6    4   500
+7    2   800
+8    3   800
+9    4   800
+\end{verbatim}
+
+\subsection{Set up 5-fold
+cross-validation}\label{set-up-5-fold-cross-validation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{folds }\OtherTok{\textless{}{-}} \FunctionTok{createFolds}\NormalTok{(penguins}\SpecialCharTok{$}\NormalTok{species, }\AttributeTok{k =} \DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Run cross-validation for each hyperparameter
+combination}\label{run-cross-validation-for-each-hyperparameter-combination}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cv\_results }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{mtry =}\NormalTok{ grid}\SpecialCharTok{$}\NormalTok{mtry,}
+  \AttributeTok{ntree =}\NormalTok{ grid}\SpecialCharTok{$}\NormalTok{ntree,}
+  \AttributeTok{Accuracy =} \ConstantTok{NA}
+\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(grid)) \{}
+  
+\NormalTok{  m }\OtherTok{\textless{}{-}}\NormalTok{ grid}\SpecialCharTok{$}\NormalTok{mtry[i]}
+\NormalTok{  t }\OtherTok{\textless{}{-}}\NormalTok{ grid}\SpecialCharTok{$}\NormalTok{ntree[i]}
+  
+\NormalTok{  acc\_vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{()}
+  
+  \ControlFlowTok{for}\NormalTok{ (k }\ControlFlowTok{in} \DecValTok{1}\SpecialCharTok{:}\DecValTok{5}\NormalTok{) \{}
+    
+\NormalTok{    test\_idx  }\OtherTok{\textless{}{-}}\NormalTok{ folds[[k]]}
+\NormalTok{    train\_set }\OtherTok{\textless{}{-}}\NormalTok{ penguins[}\SpecialCharTok{{-}}\NormalTok{test\_idx, ]}
+\NormalTok{    test\_set  }\OtherTok{\textless{}{-}}\NormalTok{ penguins[test\_idx, ]}
+    
+    \CommentTok{\# Fit model}
+\NormalTok{    rf\_model }\OtherTok{\textless{}{-}} \FunctionTok{randomForest}\NormalTok{(}
+\NormalTok{      species }\SpecialCharTok{\textasciitilde{}}\NormalTok{ bill\_length\_mm }\SpecialCharTok{+}\NormalTok{ bill\_depth\_mm }\SpecialCharTok{+}
+\NormalTok{        flipper\_length\_mm }\SpecialCharTok{+}\NormalTok{ body\_mass\_g }\SpecialCharTok{+}\NormalTok{ sex,}
+      \AttributeTok{data =}\NormalTok{ train\_set,}
+      \AttributeTok{mtry =}\NormalTok{ m,}
+      \AttributeTok{ntree =}\NormalTok{ t}
+\NormalTok{    )}
+    
+    \CommentTok{\# Predict}
+\NormalTok{    pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(rf\_model, test\_set)}
+    
+    \CommentTok{\# Accuracy for this fold}
+\NormalTok{    acc }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(pred }\SpecialCharTok{==}\NormalTok{ test\_set}\SpecialCharTok{$}\NormalTok{species)}
+\NormalTok{    acc\_vec }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(acc\_vec, acc)}
+\NormalTok{  \}}
+  
+  \CommentTok{\# Store mean CV accuracy}
+\NormalTok{  cv\_results}\SpecialCharTok{$}\NormalTok{Accuracy[i] }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(acc\_vec)}
+\NormalTok{\}}
+
+\NormalTok{cv\_results}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  mtry ntree  Accuracy
+1    2   300 0.9819539
+2    3   300 0.9819539
+3    4   300 0.9789236
+4    2   500 0.9819539
+5    3   500 0.9819539
+6    4   500 0.9789236
+7    2   800 0.9819539
+8    3   800 0.9789236
+9    4   800 0.9789236
+\end{verbatim}
+
+\subsection{Select the best
+hyperparameters}\label{select-the-best-hyperparameters}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{best\_row }\OtherTok{\textless{}{-}}\NormalTok{ cv\_results[}\FunctionTok{which.max}\NormalTok{(cv\_results}\SpecialCharTok{$}\NormalTok{Accuracy), ]}
+\NormalTok{best\_row}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  mtry ntree  Accuracy
+1    2   300 0.9819539
+\end{verbatim}
+
+\bookmarksetup{startatroot}
+
+\chapter{Extreme Gradient Boosting
+(XGBoost)}\label{extreme-gradient-boosting-xgboost}
+
+Extreme Gradient Boosting (XGBoost) is a machine learning algorithm that
+uses gradient boosted decision trees. It is part of a new generation of
+algorithms that are designed to be highly accurate.
+
+XGBoost improves accuracy mainly by reducing overfitting during
+training. This is achieved through its objective function, which has two
+parts:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Loss function -- measures how far the model's predictions are from the
+  actual values.
+\item
+  Regularization -- controls the complexity of the model, helping to
+  prevent overfitting.
+\end{enumerate}
+
+By combining these, XGBoost builds a model that is both accurate and
+generalizes well to new data.
+
+\section{Without cross validation}\label{without-cross-validation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install packages if not already installed}
+\CommentTok{\# install.packages("xgboost")}
+\CommentTok{\# install.packages("caret")}
+\CommentTok{\# install.packages("Matrix")}
+
+\FunctionTok{library}\NormalTok{(xgboost)}
+\FunctionTok{library}\NormalTok{(caret)}
+\FunctionTok{library}\NormalTok{(Matrix)}
+
+\CommentTok{\# Example dataset: Iris (binary classification: setosa vs others)}
+\FunctionTok{data}\NormalTok{(iris)}
+\NormalTok{iris}\SpecialCharTok{$}\NormalTok{label }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(iris}\SpecialCharTok{$}\NormalTok{Species }\SpecialCharTok{==} \StringTok{"setosa"}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)  }\CommentTok{\# binary label}
+\NormalTok{iris}\SpecialCharTok{$}\NormalTok{Species }\OtherTok{\textless{}{-}} \ConstantTok{NULL}  \CommentTok{\# remove original factor}
+
+\CommentTok{\# Split data into training and test sets}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{train\_index }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(iris}\SpecialCharTok{$}\NormalTok{label, }\AttributeTok{p =} \FloatTok{0.8}\NormalTok{, }\AttributeTok{list =} \ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{train\_data }\OtherTok{\textless{}{-}}\NormalTok{ iris[train\_index, ]}
+\NormalTok{test\_data }\OtherTok{\textless{}{-}}\NormalTok{ iris[}\SpecialCharTok{{-}}\NormalTok{train\_index, ]}
+
+\CommentTok{\# Convert data to matrix form}
+\NormalTok{train\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(train\_data[, }\SpecialCharTok{{-}}\FunctionTok{ncol}\NormalTok{(train\_data)])}
+\NormalTok{train\_label }\OtherTok{\textless{}{-}}\NormalTok{ train\_data}\SpecialCharTok{$}\NormalTok{label}
+\NormalTok{test\_matrix }\OtherTok{\textless{}{-}} \FunctionTok{as.matrix}\NormalTok{(test\_data[, }\SpecialCharTok{{-}}\FunctionTok{ncol}\NormalTok{(test\_data)])}
+\NormalTok{test\_label }\OtherTok{\textless{}{-}}\NormalTok{ test\_data}\SpecialCharTok{$}\NormalTok{label}
+
+\CommentTok{\# Create DMatrix objects (XGBoost format)}
+\NormalTok{dtrain }\OtherTok{\textless{}{-}} \FunctionTok{xgb.DMatrix}\NormalTok{(}\AttributeTok{data =}\NormalTok{ train\_matrix, }\AttributeTok{label =}\NormalTok{ train\_label)}
+\NormalTok{dtest }\OtherTok{\textless{}{-}} \FunctionTok{xgb.DMatrix}\NormalTok{(}\AttributeTok{data =}\NormalTok{ test\_matrix, }\AttributeTok{label =}\NormalTok{ test\_label)}
+
+\CommentTok{\# Set parameters}
+\NormalTok{params }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(}
+  \AttributeTok{booster =} \StringTok{"gbtree"}\NormalTok{,}
+  \AttributeTok{objective =} \StringTok{"binary:logistic"}\NormalTok{,}
+  \AttributeTok{eval\_metric =} \StringTok{"logloss"}\NormalTok{,  }\CommentTok{\# or "error"}
+  \AttributeTok{eta =} \FloatTok{0.1}\NormalTok{,  }\CommentTok{\# learning rate}
+  \AttributeTok{max\_depth =} \DecValTok{3}\NormalTok{,}
+  \AttributeTok{min\_child\_weight =} \DecValTok{1}\NormalTok{,}
+  \AttributeTok{subsample =} \FloatTok{0.8}\NormalTok{,}
+  \AttributeTok{colsample\_bytree =} \FloatTok{0.8}
+\NormalTok{)}
+
+\CommentTok{\# Train the model}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{123}\NormalTok{)}
+\NormalTok{xgb\_model }\OtherTok{\textless{}{-}} \FunctionTok{xgb.train}\NormalTok{(}
+  \AttributeTok{params =}\NormalTok{ params,}
+  \AttributeTok{data =}\NormalTok{ dtrain,}
+  \AttributeTok{nrounds =} \DecValTok{100}\NormalTok{,}
+  \AttributeTok{watchlist =} \FunctionTok{list}\NormalTok{(}\AttributeTok{train =}\NormalTok{ dtrain, }\AttributeTok{test =}\NormalTok{ dtest),}
+  \AttributeTok{early\_stopping\_rounds =} \DecValTok{10}\NormalTok{,}
+  \AttributeTok{print\_every\_n =} \DecValTok{10}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Multiple eval metrics are present. Will use test_logloss for early stopping.
+Will train until test_logloss hasn't improved in 10 rounds.
+
+[1] train-logloss:0.552090  test-logloss:0.552090 
+[11]    train-logloss:0.179963  test-logloss:0.179392 
+[21]    train-logloss:0.074191  test-logloss:0.073715 
+[31]    train-logloss:0.036053  test-logloss:0.035705 
+[41]    train-logloss:0.021509  test-logloss:0.021298 
+[51]    train-logloss:0.019402  test-logloss:0.019212 
+Stopping. Best iteration:
+[56]    train-logloss:0.019402  test-logloss:0.019212
+
+[56]    train-logloss:0.019402  test-logloss:0.019212 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Make predictions}
+\NormalTok{pred\_prob }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(xgb\_model, dtest)}
+\NormalTok{pred\_label }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(pred\_prob }\SpecialCharTok{\textgreater{}} \FloatTok{0.5}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# Evaluate}
+\FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{factor}\NormalTok{(pred\_label), }\FunctionTok{factor}\NormalTok{(test\_label))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Confusion Matrix and Statistics
+
+          Reference
+Prediction  0  1
+         0 20  0
+         1  0 10
+                                     
+               Accuracy : 1          
+                 95% CI : (0.8843, 1)
+    No Information Rate : 0.6667     
+    P-Value [Acc > NIR] : 5.215e-06  
+                                     
+                  Kappa : 1          
+                                     
+ Mcnemar's Test P-Value : NA         
+                                     
+            Sensitivity : 1.0000     
+            Specificity : 1.0000     
+         Pos Pred Value : 1.0000     
+         Neg Pred Value : 1.0000     
+             Prevalence : 0.6667     
+         Detection Rate : 0.6667     
+   Detection Prevalence : 0.6667     
+      Balanced Accuracy : 1.0000     
+                                     
+       'Positive' Class : 0          
+                                     
+\end{verbatim}
+
+\section{With cross validation}\label{with-cross-validation}
+
+\bookmarksetup{startatroot}
+
+\chapter{Exercise: MCQ}\label{exercise-mcq}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Which of the following statements is true about a Decision Tree?
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  It is an ensemble method combining multiple models
+\item
+  It splits the data based on feature values to create a tree structure
+\item
+  It always gives better accuracy than Random Forest
+\item
+  It cannot be used for classification tasks
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Bagging (Bootstrap Aggregating) primarily helps to:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  Reduce bias in the model
+\item
+  Reduce variance in the model
+\item
+  Increase the depth of a single decision tree
+\item
+  Select the most important feature only
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Random Forest differs from Bagging mainly because it:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  Uses boosting instead of bagging
+\item
+  Randomly selects a subset of features at each split
+\item
+  Builds only a single decision tree
+\item
+  Increases bias intentionally
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  AdaBoost works by:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  Training multiple weak learners sequentially, focusing on
+  misclassified points
+\item
+  Training multiple models independently and averaging predictions
+\item
+  Using only deep decision trees as base learners
+\item
+  Randomly dropping features to reduce correlation
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Which of the following is true regarding Random Forest?
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  It is sensitive to outliers
+\item
+  It is a type of boosting method
+\item
+  It reduces overfitting compared to a single decision tree
+\item
+  It cannot handle categorical variables
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  In AdaBoost, the weights of misclassified observations:
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  Decrease in the next iteration
+\item
+  Remain the same
+\item
+  Increase in the next iteration
+\item
+  are ignored
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Which method is most likely to reduce both variance and overfitting?
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{\Alph{enumi})}
+\item
+  Single Decision Tree
+\item
+  Bagging
+\item
+  Random Forest
+\item
+  AdaBoost
+\end{enumerate}
+
+\bookmarksetup{startatroot}
+
+\chapter{Support Vector Machine}\label{support-vector-machine}
+
+\section{What is a hyperplane?}\label{what-is-a-hyperplane}
+
+A hyperplane is a flat, dividing surface in a vector space that's one
+dimension smaller than the space it's in; it generalizes concepts like
+lines (in 2D) and planes (in 3D) to higher dimensions, acting as a
+decision boundary in machine learning for separating data into classes.
+
+In-class
+
+\begin{itemize}
+\item
+  Hyperplane in 2D
+\item
+  Hyperplane in 3D
+\end{itemize}
+
+\href{https://www.enjoyalgorithms.com/blog/support-vector-machine-in-ml}{Reading}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ch9_files/figure-pdf/unnamed-chunk-1-1.pdf}}
+
+\section{Mathematical Definition of
+Hyperplanes}\label{mathematical-definition-of-hyperplanes}
+
+In-class
+
+\section{Classification Using a Separating
+Hyperplane}\label{classification-using-a-separating-hyperplane}
+
+One can easily determine on which side of the hyperplane a point lies by
+simply calculating the sign.
+
+\section{There can be multiple number of hyperplanes. Which is the
+best?}\label{there-can-be-multiple-number-of-hyperplanes.-which-is-the-best}
+
+In-class diagram
+
+\section{Criteria for choosing the best
+hyperplane}\label{criteria-for-choosing-the-best-hyperplane}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Maximum margin (SVM approach):
+
+  Pick the hyperplane where the distance to the nearest points on both
+  sides is maximized.
+
+  Ensures better generalization.
+\item
+  Minimizing classification error:
+
+  Count the number of misclassified points for each hyperplane.
+
+  Choose the hyperplane with the fewest misclassifications.
+\item
+  Other metrics (if regression or probabilistic separation):
+
+  Accuracy, Precision, Recall, F1-score for classification.
+
+  Mean Squared Error (MSE) for regression.
+\end{enumerate}
+
+\section{Maximal Margin Hyperplane (Optimal Separating
+Hyperplane)}\label{maximal-margin-hyperplane-optimal-separating-hyperplane}
+
+\textbf{Concept:}
+
+For linearly separable data:
+
+There are many hyperplanes that can separate two classes.
+
+The maximum margin hyperplane is the one that maximizes the distance
+(margin) to the nearest points of both classes.
+
+\pandocbounded{\includegraphics[keepaspectratio]{ch9_files/figure-pdf/unnamed-chunk-2-1.pdf}}
+
+Imagine a 2D scenario:
+
+You have two groups of points on a piece of paper:
+
+Group A (e.g., red dots)
+
+Group B (e.g., green dots)
+
+You want to draw a straight line that separates the two groups.
+
+There are many possible lines that can separate them.
+
+\textbf{The ``maximum margin'' idea:}
+
+Instead of just picking any line, you want the line to be as far away as
+possible from the nearest points in each group.
+
+\textbf{Why?}
+
+This gives more ``breathing room'' for your decision.
+
+Makes the classification more robust to new points or slight noise.
+
+The distance between the line and the nearest points of each group is
+called the margin.
+
+The Maximum Margin Hyperplane is the line that makes this margin as wide
+as possible.
+
+\textbf{Simple analogy:}
+
+Think of a road between two rows of parked cars:
+
+There's many possible paths you could drive through.
+
+You choose the path that keeps the largest distance from both rows, so
+you have maximum safety space.
+
+That ``safest path'' is like the maximum margin hyperplane.
+
+\section{Maximal Margin Hyperplane: Optimization
+problem}\label{maximal-margin-hyperplane-optimization-problem}
+
+In-class
+
+\href{https://python.plainenglish.io/support-vector-machine-svm-clearly-explained-d9db9123b7ac}{Reading}
+
+\section{Limitations: Maximal Margin
+Hyperplane}\label{limitations-maximal-margin-hyperplane}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Sensitive to outliers
+
+  Example: One point far away from its class can completely change the
+  hyperplane.
+
+  Since the MMH tries to maximize margin while keeping all points
+  correctly classified, even a single outlier may force the hyperplane
+  to tilt badly.
+
+  This can reduce the generalization to new data.
+\item
+  Cannot handle non-linearly separable data
+
+  If the two classes overlap, there is no hyperplane that separates them
+  perfectly.
+
+  Hard-margin SVM cannot be applied directly in this case.
+\item
+  Overfitting risk
+
+  If we try to force perfect separation with noisy data, the MMH may fit
+  very tightly to specific points, which is not robust.
+\end{enumerate}
+
+\section{Soft margin classifier or Support Vector Classifier
+(SVC)}\label{soft-margin-classifier-or-support-vector-classifier-svc}
+
+Like the Maximum Margin Classifier (MMC), the main goal of the Support
+Vector Classifier (SVC) is to find the best boundary that separates
+classes. However, unlike the MMC, which needs a perfect separation, the
+SVC allows a few points to be misclassified. This makes it more flexible
+and robust, especially when the data is noisy or the classes overlap.
+
+\section{Support Vector Classifier: Optimization
+Problem}\label{support-vector-classifier-optimization-problem}
+
+In-class
+
+\section{Support Vector Machine (SVM): Kernel Trick (Non-linear
+boundary)}\label{support-vector-machine-svm-kernel-trick-non-linear-boundary}
+
+\begin{itemize}
+\item
+  Sometimes, the classes in your data cannot be separated by a straight
+  line (not linearly separable).
+\item
+  The kernel trick lets SVM draw a straight line in a higher-dimensional
+  space, which corresponds to a curved or non-linear boundary in the
+  original space.
+\end{itemize}
+
+In other words
+
+\begin{itemize}
+\tightlist
+\item
+  Start simple in low dimensions. If the data cannot be separated, lift
+  it to a higher-dimensional space. Then find the widest possible road
+  (support vector classifier) that separates the classes, allowing some
+  flexibility if needed.
+\end{itemize}
+
+\href{https://www.enjoyalgorithms.com/blog/support-vector-machine-in-ml}{Diagrams}
+
+\section{Summary}\label{summary-1}
+
+A Support Vector Machine (SVM) is a supervised machine learning
+algorithm used for classification and regression. Its main goal is to
+find the best boundary (hyperplane) that separates different classes of
+data.
+
+For linearly separable data: SVM finds the Maximum Margin Hyperplane
+(MMH), which maximizes the distance to the nearest points of each class.
+
+For real-world or noisy data: SVM uses a soft margin (Support Vector
+Classifier) to allow some misclassifications while still maximizing the
+margin.
+
+For non-linear separation: SVM can use kernels to transform the data
+into a higher-dimensional space where a linear boundary can separate
+classes.
+
+\section{SVM with R}\label{svm-with-r}
+
+\subsection{Example 1}\label{example-1-1}
+
+Data
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Small dataset}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}
+  \AttributeTok{x =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{6}\NormalTok{),}
+  \AttributeTok{y =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{6}\NormalTok{),}
+  \AttributeTok{class =} \FunctionTok{factor}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{))}
+\NormalTok{)}
+
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  x y class
+1 1 2     0
+2 2 1     0
+3 3 4     0
+4 4 5     1
+5 5 4     1
+6 6 6     1
+\end{verbatim}
+
+Fit SVM
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(e1071)}
+\CommentTok{\# Fit linear SVM}
+\NormalTok{svm\_model }\OtherTok{\textless{}{-}} \FunctionTok{svm}\NormalTok{(class }\SpecialCharTok{\textasciitilde{}}\NormalTok{ x }\SpecialCharTok{+}\NormalTok{ y, }\AttributeTok{data =}\NormalTok{ df, }\AttributeTok{kernel =} \StringTok{"linear"}\NormalTok{, }\AttributeTok{cost =} \DecValTok{1}\NormalTok{)}
+\CommentTok{\# Print model summary}
+\FunctionTok{summary}\NormalTok{(svm\_model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+
+Call:
+svm(formula = class ~ x + y, data = df, kernel = "linear", cost = 1)
+
+
+Parameters:
+   SVM-Type:  C-classification 
+ SVM-Kernel:  linear 
+       cost:  1 
+
+Number of Support Vectors:  5
+
+ ( 3 2 )
+
+
+Number of Classes:  2 
+
+Levels: 
+ 0 1
+\end{verbatim}
+
+Predictions
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Predict on training data}
+\NormalTok{pred }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(svm\_model, df)}
+
+\CommentTok{\# Compare predictions with true labels}
+\NormalTok{df}\SpecialCharTok{$}\NormalTok{pred }\OtherTok{\textless{}{-}}\NormalTok{ pred}
+\NormalTok{df}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+  x y class pred
+1 1 2     0    0
+2 2 1     0    0
+3 3 4     0    1
+4 4 5     1    1
+5 5 4     1    1
+6 6 6     1    1
+\end{verbatim}
+
+Accuracy Measures
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Confusion matrix}
+\FunctionTok{table}\NormalTok{(}\AttributeTok{Predicted =}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{pred, }\AttributeTok{Actual =}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{class)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+         Actual
+Predicted 0 1
+        0 2 0
+        1 1 3
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Accuracy}
+\NormalTok{accuracy }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{pred }\SpecialCharTok{==}\NormalTok{ df}\SpecialCharTok{$}\NormalTok{class)}
+\NormalTok{accuracy}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 0.8333333
+\end{verbatim}
+
+\subsection{Example 2}\label{example-2-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Loading necessary libraries}
+\FunctionTok{library}\NormalTok{(e1071)}
+\FunctionTok{library}\NormalTok{(ggplot2)}
+
+\CommentTok{\# Preparing data}
+\FunctionTok{data}\NormalTok{(iris)}
+\NormalTok{subset\_iris }\OtherTok{\textless{}{-}}\NormalTok{ iris[iris}\SpecialCharTok{$}\NormalTok{Species }\SpecialCharTok{!=} \StringTok{\textquotesingle{}setosa\textquotesingle{}}\NormalTok{, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{5}\NormalTok{)]}
+
+\CommentTok{\# Building SVM model}
+\NormalTok{svm\_model }\OtherTok{\textless{}{-}} \FunctionTok{svm}\NormalTok{(Species}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ subset\_iris, }\AttributeTok{method=}\StringTok{"C{-}classification"}\NormalTok{, }
+                 \AttributeTok{kernel =} \StringTok{"linear"}\NormalTok{)}
+
+\CommentTok{\# Plotting with base R}
+\FunctionTok{plot}\NormalTok{(svm\_model, subset\_iris)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ch9_files/figure-pdf/unnamed-chunk-7-1.pdf}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{svm\_data }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(subset\_iris, }\AttributeTok{fit=}\FunctionTok{predict}\NormalTok{(svm\_model, subset\_iris))}
+\FunctionTok{ggplot}\NormalTok{(svm\_data, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Sepal.Length, }\AttributeTok{x=}\NormalTok{Sepal.Width, }\AttributeTok{color=}\NormalTok{Species)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{() }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{data=}\NormalTok{svm\_data[svm\_model}\SpecialCharTok{$}\NormalTok{index,], }\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{Sepal.Length, }\AttributeTok{x=}\NormalTok{Sepal.Width), }
+               \AttributeTok{shape=}\DecValTok{8}\NormalTok{, }\AttributeTok{size=}\DecValTok{3}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"SVM Classification with ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\pandocbounded{\includegraphics[keepaspectratio]{ch9_files/figure-pdf/unnamed-chunk-7-2.pdf}}
+
+When you train an SVM model in R using the e1071::svm() function, the
+algorithm tries to find the optimal hyperplane that separates the
+classes. Not all points in your dataset influence this hyperplane ---
+only some of them lie on the margin or are close to it. These critical
+points are called support vectors. \texttt{svm\_model\$index} contains
+the row numbers (indices) of the training data that are support vectors.
+These support vectors are the only points that define the SVM decision
+boundary. Points far from the margin do not affect the hyperplane.
+
+\section{Multi-class classification using Support Vector
+Machines}\label{multi-class-classification-using-support-vector-machines}
+
+Support Vector Machines (SVMs) are inherently binary classifiers
+designed to find an optimal hyperplane separating two classes. To adapt
+SVMs for multi-class classification (problems with three or more
+classes), the problem is typically decomposed into multiple binary
+classification tasks using specific strategies.
+
+The two most common methods for achieving multi-class classification
+with SVMs are:
+
+\textbf{1. One-vs-Rest (OvR) or One-vs-All (OvA)}
+
+In the OvR approach, a separate binary SVM model is trained for each
+class.
+
+Training Phase: If there are (N) classes, (N) different SVM classifiers
+are trained. For classifier (i), all instances of class (i) are treated
+as positive examples, and all instances from the other (N-1) classes are
+grouped together as negative examples.Prediction Phase: For a new data
+point, all (N) classifiers run their predictions. The classifier that
+outputs the highest score or confidence determines the final class
+label.
+
+Pros/Cons: This method is computationally efficient in training as it
+only requires fitting (N) models. However, it can suffer from class
+imbalance because the ``rest'' class is usually much larger than the
+single ``one'' class. It's often preferred when computational efficiency
+is a priority.
+
+\textbf{2. One-vs-One (OvO)}
+
+The OvO method trains a binary SVM for every possible pair of classes.
+For (N) classes, this means training (N*(N-1)/2) classifiers, each using
+data only from the two classes it is trained to distinguish. During
+prediction, each classifier votes for one of its two classes, and the
+data point is assigned to the class with the most votes. OvO is more
+computationally intensive in training than OvR but can offer higher
+accuracy through focused pairwise comparisons. It scales well with the
+number of training samples but not as well with a large number of
+classes.
+
+\section{SVM Hyper Parameters}\label{svm-hyper-parameters}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  C (Cost)
+
+  Purpose: Regularization parameter controlling the trade-off between
+  training accuracy and model generalization.
+
+  Effect:
+
+  Small C: Allows more misclassifications on the training data → wider
+  margin → better generalization, less risk of overfitting.
+
+  Large C: Tries to classify all training examples correctly → narrower
+  margin → risk of overfitting.
+
+  Intuition: Think of C as how ``strict'' the SVM is about classifying
+  the training points correctly.
+\item
+  Kernel
+
+  Purpose: Transforms data into a higher-dimensional space so that it
+  may become linearly separable.
+
+  Common kernels:
+
+  Linear: Use when data is already linearly separable.
+
+  Polynomial: Adds polynomial combinations of features; good for curved
+  decision boundaries.
+
+  RBF (Gaussian): Maps data into infinite-dimensional space; popular
+  default choice for non-linear problems.
+
+  Sigmoid: Similar to a neural network activation function; less
+  commonly used.
+
+  Intuition: The kernel decides the ``shape'' of the decision boundary.
+\item
+  Gamma (γ)
+
+  Purpose: Defines how far the influence of a single training point
+  reaches in the feature space.
+
+  Effect (RBF or polynomial kernels):
+
+  Low gamma: Each point has broad influence → smoother decision boundary
+  → less risk of overfitting.
+
+  High gamma: Each point has very localized influence → more complex
+  boundary → higher risk of overfitting.
+
+  Intuition: Think of gamma as how ``far'' each point can reach to
+  affect the boundary.
+\end{enumerate}
 
 \bookmarksetup{startatroot}
 

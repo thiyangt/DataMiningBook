@@ -84,8 +84,6 @@ During k-fold cross-validation, you train K different random forest models, each
 
 But none of those K models is your final model.
 
-
-
 The purpose of Cross Validation in Random Forest
 
 ✔️ Evaluate multiple hyperparameter combinations
