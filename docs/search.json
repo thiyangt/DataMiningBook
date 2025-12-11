@@ -118,5 +118,65 @@
     "crumbs": [
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Measures of Performance</span>"
     ]
+  },
+  {
+    "objectID": "ch6.html",
+    "href": "ch6.html",
+    "title": "6  k-fold Cross Validation Approaches",
+    "section": "",
+    "text": "6.1 Load Packages\nlibrary(randomForest)\nlibrary(pROC)\nlibrary(caret)\nlibrary(palmerpenguins)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>k-fold Cross Validation Approaches</span>"
+    ]
+  },
+  {
+    "objectID": "ch6.html#prepare-data",
+    "href": "ch6.html#prepare-data",
+    "title": "6  k-fold Cross Validation Approaches",
+    "section": "6.2 Prepare data",
+    "text": "6.2 Prepare data\n\npenguins &lt;- penguins |&gt; na.omit()\npenguins$species &lt;- factor(penguins$species)",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>k-fold Cross Validation Approaches</span>"
+    ]
+  },
+  {
+    "objectID": "ch6.html#create-k-fold-cross-validation",
+    "href": "ch6.html#create-k-fold-cross-validation",
+    "title": "6  k-fold Cross Validation Approaches",
+    "section": "6.3 Create k-fold cross validation",
+    "text": "6.3 Create k-fold cross validation\n\nset.seed(123)\nfolds &lt;- createFolds(penguins$species, k = 5)\nfolds\n\n$Fold1\n [1]   8  13  16  20  23  27  36  51  56  57  58  60  63  64  87  90  91  94  96\n[20] 106 110 112 118 124 125 130 134 138 139 151 152 154 156 166 181 182 190 200\n[39] 204 206 211 213 222 234 235 236 238 240 243 244 254 257 263 266 273 277 278\n[58] 284 291 302 309 310 312 313 317 324\n\n$Fold2\n [1]  10  12  14  19  22  30  33  43  46  47  54  61  68  71  72  74  78  82  92\n[20]  97 102 104 107 108 111 119 120 123 132 147 149 158 160 161 169 174 178 180\n[39] 191 192 198 199 201 202 215 219 226 231 237 242 248 250 259 267 268 270 274\n[58] 280 287 300 316 319 320 322 332 333\n\n$Fold3\n [1]   3   4   5  15  17  18  25  29  32  35  37  40  44  45  48  66  70  86  89\n[20]  93  99 105 116 122 129 131 136 140 141 144 157 165 172 177 183 184 186 187\n[39] 194 195 197 205 207 209 210 212 217 218 220 228 229 232 262 276 281 282 285\n[58] 288 289 292 293 298 304 315 323 325 329\n\n$Fold4\n [1]   1   6   9  11  24  26  28  38  39  41  52  62  67  69  79  81  83  84  85\n[20]  88  98 100 109 115 128 135 143 145 146 153 155 159 164 167 168 175 188 193\n[39] 196 208 216 221 223 224 227 230 233 241 247 256 258 261 265 269 271 286 290\n[58] 299 301 303 305 306 307 308 311 321 331\n\n$Fold5\n [1]   2   7  21  31  34  42  49  50  53  55  59  65  73  75  76  77  80  95 101\n[20] 103 113 114 117 121 126 127 133 137 142 148 150 162 163 170 171 173 176 179\n[39] 185 189 203 214 225 239 245 246 249 251 252 253 255 260 264 272 275 279 283\n[58] 294 295 296 297 314 318 326 327 328 330",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>k-fold Cross Validation Approaches</span>"
+    ]
+  },
+  {
+    "objectID": "ch6.html#run-random-forest-on-each-fold",
+    "href": "ch6.html#run-random-forest-on-each-fold",
+    "title": "6  k-fold Cross Validation Approaches",
+    "section": "6.4 Run random forest on each fold",
+    "text": "6.4 Run random forest on each fold\n\nresults &lt;- data.frame(\n  Fold = 1:5,\n  Accuracy = NA,\n  Sensitivity = NA,\n  Specificity = NA,\n  AUC = NA\n)\n\nroc_list &lt;- list()\n\nfor (i in 1:5) {\n  \n  test_idx  &lt;- folds[[i]]\n  train_set &lt;- penguins[-test_idx, ]\n  test_set  &lt;- penguins[test_idx, ]\n  \n  # Fit RF\n  rf_model &lt;- randomForest(\n    species ~ bill_length_mm + bill_depth_mm +\n      flipper_length_mm + body_mass_g + sex,\n    data = train_set,\n    ntree = 500,\n    mtry = 3,\n    importance = TRUE\n  )\n  \n  # Predict class\n  pred_class &lt;- predict(rf_model, test_set)\n  \n  # Predict probabilities\n  pred_prob &lt;- predict(rf_model, test_set, type = \"prob\")\n  \n  # Confusion matrix\n  cm &lt;- confusionMatrix(pred_class, test_set$species)\n  \n  results$Accuracy[i]    &lt;- cm$overall[\"Accuracy\"]\n  results$Sensitivity[i] &lt;- mean(cm$byClass[, \"Sensitivity\"], na.rm = TRUE)\n  results$Specificity[i] &lt;- mean(cm$byClass[, \"Specificity\"], na.rm = TRUE)\n  \n  # Hand–Till AUC for MULTICLASS\n  roc_obj &lt;- multiclass.roc(response = test_set$species, predictor = pred_prob)\n  results$AUC[i] &lt;- auc(roc_obj)\n  \n  roc_list[[i]] &lt;- roc_obj\n}\n\nresults\n\n  Fold  Accuracy Sensitivity Specificity       AUC\n1    1 0.9545455   0.9631226   0.9794849 0.9990790\n2    2 0.9848485   0.9885057   0.9937107 0.9986737\n3    3 0.9850746   0.9888889   0.9937107 1.0000000\n4    4 0.9850746   0.9761905   0.9912281 1.0000000\n5    5 0.9701493   0.9523810   0.9824561 0.9958949",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>k-fold Cross Validation Approaches</span>"
+    ]
+  },
+  {
+    "objectID": "ch6.html#when-using-random-forest-with-cross-validation-what-is-the-final-model",
+    "href": "ch6.html#when-using-random-forest-with-cross-validation-what-is-the-final-model",
+    "title": "6  k-fold Cross Validation Approaches",
+    "section": "6.5 When using Random Forest with Cross-Validation, what is the final model?",
+    "text": "6.5 When using Random Forest with Cross-Validation, what is the final model?\nDuring k-fold cross-validation, you train K different random forest models, each on a different subset of the data.\nBut none of those K models is your final model.\nThe purpose of Cross Validation in Random Forest\n✔️ Evaluate multiple hyperparameter combinations\nFor example:\nmtry (number of variables randomly chosen at each split)\nntree (number of trees)\nnodesize\nmaxnodes\n✔️ Measure model performance for each hyperparameter set\nUsing:\nAccuracy\nAUC\nSensitivity / Specificity\nKappa\nLog-loss (if needed)\n✔️ Choose the best-performing hyperparameter combination\n(Usually the one giving highest CV accuracy or AUC.)\n🎯 Then what?\nAfter identifying the best hyperparameters\n👉 You retrain one final random forest model on the entire dataset using ONLY the best hyperparameters.",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>k-fold Cross Validation Approaches</span>"
+    ]
+  },
+  {
+    "objectID": "ch6.html#example",
+    "href": "ch6.html#example",
+    "title": "6  k-fold Cross Validation Approaches",
+    "section": "6.6 Example",
+    "text": "6.6 Example\n\n6.6.1 Hyperparameter Grid\n\ngrid &lt;- expand.grid(\n  mtry  = c(2, 3, 4),\n  ntree = c(300, 500, 800)\n)\ngrid\n\n  mtry ntree\n1    2   300\n2    3   300\n3    4   300\n4    2   500\n5    3   500\n6    4   500\n7    2   800\n8    3   800\n9    4   800\n\n\n\n\n6.6.2 Set up 5-fold cross-validation\n\nset.seed(123)\nfolds &lt;- createFolds(penguins$species, k = 5)\n\n\n\n6.6.3 Run cross-validation for each hyperparameter combination\n\ncv_results &lt;- data.frame(\n  mtry = grid$mtry,\n  ntree = grid$ntree,\n  Accuracy = NA\n)\n\nfor (i in 1:nrow(grid)) {\n  \n  m &lt;- grid$mtry[i]\n  t &lt;- grid$ntree[i]\n  \n  acc_vec &lt;- c()\n  \n  for (k in 1:5) {\n    \n    test_idx  &lt;- folds[[k]]\n    train_set &lt;- penguins[-test_idx, ]\n    test_set  &lt;- penguins[test_idx, ]\n    \n    # Fit model\n    rf_model &lt;- randomForest(\n      species ~ bill_length_mm + bill_depth_mm +\n        flipper_length_mm + body_mass_g + sex,\n      data = train_set,\n      mtry = m,\n      ntree = t\n    )\n    \n    # Predict\n    pred &lt;- predict(rf_model, test_set)\n    \n    # Accuracy for this fold\n    acc &lt;- mean(pred == test_set$species)\n    acc_vec &lt;- c(acc_vec, acc)\n  }\n  \n  # Store mean CV accuracy\n  cv_results$Accuracy[i] &lt;- mean(acc_vec)\n}\n\ncv_results\n\n  mtry ntree  Accuracy\n1    2   300 0.9819539\n2    3   300 0.9819539\n3    4   300 0.9789236\n4    2   500 0.9819539\n5    3   500 0.9819539\n6    4   500 0.9789236\n7    2   800 0.9819539\n8    3   800 0.9789236\n9    4   800 0.9789236\n\n\n\n\n6.6.4 Select the best hyperparameters\n\nbest_row &lt;- cv_results[which.max(cv_results$Accuracy), ]\nbest_row\n\n  mtry ntree  Accuracy\n1    2   300 0.9819539",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>k-fold Cross Validation Approaches</span>"
+    ]
   }
 ]

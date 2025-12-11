@@ -1,0 +1,201 @@
+# k-fold Cross Validation Approaches
+
+## Load Packages
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+library(randomForest)
+library(pROC)
+library(caret)
+library(palmerpenguins)
+```
+
+## Prepare data
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+penguins <- penguins |> na.omit()
+penguins$species <- factor(penguins$species)
+
+```
+
+## Create k-fold cross validation
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+set.seed(123)
+folds <- createFolds(penguins$species, k = 5)
+folds
+```
+
+## Run random forest on each fold
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+results <- data.frame(
+  Fold = 1:5,
+  Accuracy = NA,
+  Sensitivity = NA,
+  Specificity = NA,
+  AUC = NA
+)
+
+roc_list <- list()
+
+for (i in 1:5) {
+  
+  test_idx  <- folds[[i]]
+  train_set <- penguins[-test_idx, ]
+  test_set  <- penguins[test_idx, ]
+  
+  # Fit RF
+  rf_model <- randomForest(
+    species ~ bill_length_mm + bill_depth_mm +
+      flipper_length_mm + body_mass_g + sex,
+    data = train_set,
+    ntree = 500,
+    mtry = 3,
+    importance = TRUE
+  )
+  
+  # Predict class
+  pred_class <- predict(rf_model, test_set)
+  
+  # Predict probabilities
+  pred_prob <- predict(rf_model, test_set, type = "prob")
+  
+  # Confusion matrix
+  cm <- confusionMatrix(pred_class, test_set$species)
+  
+  results$Accuracy[i]    <- cm$overall["Accuracy"]
+  results$Sensitivity[i] <- mean(cm$byClass[, "Sensitivity"], na.rm = TRUE)
+  results$Specificity[i] <- mean(cm$byClass[, "Specificity"], na.rm = TRUE)
+  
+  # Hand–Till AUC for MULTICLASS
+  roc_obj <- multiclass.roc(response = test_set$species, predictor = pred_prob)
+  results$AUC[i] <- auc(roc_obj)
+  
+  roc_list[[i]] <- roc_obj
+}
+
+results
+
+```
+
+## When using Random Forest with Cross-Validation, what is the final model?
+
+During k-fold cross-validation, you train K different random forest models, each on a different subset of the data.
+
+But none of those K models is your final model.
+
+
+
+The purpose of Cross Validation in Random Forest
+
+✔️ Evaluate multiple hyperparameter combinations
+
+For example:
+
+mtry (number of variables randomly chosen at each split)
+
+ntree (number of trees)
+
+nodesize
+
+maxnodes
+
+✔️ Measure model performance for each hyperparameter set
+
+Using:
+
+Accuracy
+
+AUC
+
+Sensitivity / Specificity
+
+Kappa
+
+Log-loss (if needed)
+
+✔️ Choose the best-performing hyperparameter combination
+
+(Usually the one giving highest CV accuracy or AUC.)
+
+🎯 Then what?
+
+After identifying the best hyperparameters
+
+👉 You retrain one final random forest model on the entire dataset using ONLY the best hyperparameters.
+
+## Example
+
+### Hyperparameter Grid
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+grid <- expand.grid(
+  mtry  = c(2, 3, 4),
+  ntree = c(300, 500, 800)
+)
+grid
+
+```
+
+### Set up 5-fold cross-validation
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+set.seed(123)
+folds <- createFolds(penguins$species, k = 5)
+
+```
+
+### Run cross-validation for each hyperparameter combination
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+cv_results <- data.frame(
+  mtry = grid$mtry,
+  ntree = grid$ntree,
+  Accuracy = NA
+)
+
+for (i in 1:nrow(grid)) {
+  
+  m <- grid$mtry[i]
+  t <- grid$ntree[i]
+  
+  acc_vec <- c()
+  
+  for (k in 1:5) {
+    
+    test_idx  <- folds[[k]]
+    train_set <- penguins[-test_idx, ]
+    test_set  <- penguins[test_idx, ]
+    
+    # Fit model
+    rf_model <- randomForest(
+      species ~ bill_length_mm + bill_depth_mm +
+        flipper_length_mm + body_mass_g + sex,
+      data = train_set,
+      mtry = m,
+      ntree = t
+    )
+    
+    # Predict
+    pred <- predict(rf_model, test_set)
+    
+    # Accuracy for this fold
+    acc <- mean(pred == test_set$species)
+    acc_vec <- c(acc_vec, acc)
+  }
+  
+  # Store mean CV accuracy
+  cv_results$Accuracy[i] <- mean(acc_vec)
+}
+
+cv_results
+
+```
+
+### Select the best hyperparameters
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+best_row <- cv_results[which.max(cv_results$Accuracy), ]
+best_row
+
+```

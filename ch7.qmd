@@ -1,0 +1,11 @@
+## Extreme Gradient Boosting (XGBoost)
+
+Extreme Gradient Boosting (XGBoost) is a machine learning algorithm that uses gradient boosted decision trees. It is part of a new generation of algorithms that are designed to be highly accurate.
+
+XGBoost improves accuracy mainly by reducing overfitting during training. This is achieved through its objective function, which has two parts:
+
+1. Loss function – measures how far the model’s predictions are from the actual values.
+
+2. Regularization – controls the complexity of the model, helping to prevent overfitting.
+
+By combining these, XGBoost builds a model that is both accurate and generalizes well to new data.
